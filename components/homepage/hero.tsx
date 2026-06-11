@@ -1,88 +1,162 @@
-// components/sections/hero.tsx
 "use client";
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules";
-import { motion } from "framer-motion";
-import { ShieldCheck, ArrowUpRight } from "lucide-react";
-import Button from "../common/button";
-import Badge from "../common/badge";
-import { slideInLeft } from "../framer/variants";
 
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import Badge from "../common/badge";
+import Button from "../common/button";
+import { slides } from "@/utils/hero";
+import ConsultationModal from "../popups/consultation";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
-
-const SLIDES = [
-  {
-    img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80",
-    title: "Get the Perfect Loan, Stress-Free!",
-    tag: "Instant Verifications Active",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
-    title: "Scale Corporate Ventures With Liquidity.",
-    tag: "Tailored Interest Matrices",
-  },
-];
+import "swiper/css/pagination";
+import HighlightWords from "../common/animated-headline";
 
 export default function Hero() {
-  return (
-    <section id="home" className="relative py-34 overflow-hidden bg-background">
-      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 size-200 bg-radial-glow pointer-events-none z-10" />
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-      <div className="container grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-20">
+  return (
+    <section
+      id="hero"
+      className="relative scroll-mt-32 min-h-[calc(100vh-106px)] overflow-hidden flex gap-16 pt-24 flex-col items-center justify-center text-center"
+    >
+      <div className="absolute -top-30 lg:top-0 left-1/2 -translate-x-1/2 size-225 bg-radial-glow pointer-events-none z-0 opacity-75" />
+
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
+        }}
+        className="container relative z-10 flex flex-col items-center"
+      >
         <motion.div
-          variants={slideInLeft}
-          initial="hidden"
-          animate="visible"
-          className="lg:col-span-6 space-y-4"
+          variants={{
+            hidden: { opacity: 0, y: 15 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          className="mb-4 lg:mb-6"
         >
           <Badge
-            text="Struggling with Finances?"
-            icon={<ShieldCheck className="w-3 h-3" />}
+            pillText="Trusted"
+            text="Struggling With Finance"
+            showArrow={true}
           />
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground leading-tight">
-            Indian Loan Advisor <br />
-            <span className="text-brand">Financial Mastery</span>
-          </h1>
-          <p className="text-muted text-sm md:text-base font-light max-w-lg leading-relaxed">
-            Fixing financial growth paths with absolute precision and unmatched
-            deployment speeds. Access structural capital frameworks on demand.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 pt-2">
-            <Button variant="primary">Secure Loan Now</Button>
-            <Button variant="outline">Consultation</Button>
-          </div>
         </motion.div>
-
-        <div className="lg:col-span-6 w-full aspect-[4/3] rounded-xl overflow-hidden border border-gray-2 bg-gray-1/40 p-2">
-          <Swiper
-            modules={[Autoplay, EffectFade]}
-            effect="fade"
-            autoplay={{ delay: 4000, disableOnInteraction: false }}
-            className="w-full h-full rounded-xl"
+        <HighlightWords
+          words={["Get", "The", "Perfect", "Stress", "Free", "Loan"]}
+        />
+        <motion.p
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          className="text-muted text-sm sm:text-base md:text-lg max-w-2xl mb-10 font-normal leading-relaxed opacity-95"
+        >
+          Get low-interest Home Loans, Business Capital, and Loans Against
+          Property with custom repayment plans, quick documentation, and 100%
+          transparent processing.
+        </motion.p>
+        <motion.div
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          className="flex items-center justify-center gap-2 sm:gap-4 w-full"
+        >
+          <Button
+            className="w-fit!"
+            onClick={() => setIsModalOpen(true)}
+            variant="secondary"
           >
-            {SLIDES.map((slide, index) => (
-              <SwiperSlide key={index} className="relative w-full h-full">
+            Book Free Consultation
+          </Button>
+        </motion.div>
+      </motion.div>
+      <div className="container">
+        <div className="relative z-10 w-full h-90 sm:h-120 md:h-130 lg:h-150 rounded-xl overflow-hidden shadow-2xl border border-gray-2/20 bg-gray-2 backdrop-blur-sm">
+          <Swiper
+            modules={[Autoplay, EffectFade, Pagination]}
+            effect={"fade"}
+            fadeEffect={{ crossFade: true }}
+            speed={800}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+              bulletClass: "swiper-custom-bullet",
+              bulletActiveClass: "swiper-custom-bullet-active",
+            }}
+            className="w-full h-full p-0!"
+          >
+            {slides.map((slide, index) => (
+              <SwiperSlide
+                key={index}
+                className="relative w-full h-full overflow-hidden"
+              >
                 <img
-                  src={slide.img}
-                  alt="Premium Finance"
-                  className="w-full h-full object-cover rounded-xl"
+                  src={slide.image}
+                  alt={slide.alt}
+                  className="object-cover object-center h-full w-full opacity-70 select-none pointer-events-none"
+                  sizes="(max-width: 1200px) 100vw, 1200px"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90" />
-                <div className="absolute bottom-6 left-6 right-6 p-4 bg-gray-1/90 border border-gray-2/60 rounded-xl backdrop-blur-md">
-                  <span className="text-[10px] text-brand font-bold block mb-1">
-                    ⚡ {slide.tag}
-                  </span>
-                  <p className="text-xs text-foreground font-medium">
+
+                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 text-left bg-linear-to-t from-background via-background/80 to-transparent flex flex-col justify-end h-1/2 z-10">
+                  <h3 className="text-lg sm:text-2xl font-bold text-white-100 mb-1">
                     {slide.title}
+                  </h3>
+                  <p className="text-muted text-xs sm:text-base max-w-xl font-normal opacity-90">
+                    {slide.desc}
                   </p>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
+        <style jsx global>{`
+          .swiper-pagination {
+            bottom: 24px !important;
+            right: 24px !important;
+            left: auto !important;
+            width: auto !important;
+            display: flex;
+            gap: 8px;
+          }
+          @media (min-width: 640px) {
+            .swiper-pagination {
+              bottom: 40px !important;
+              right: 40px !important;
+            }
+          }
+          .swiper-custom-bullet {
+            height: 6px;
+            width: 6px;
+            border-radius: 9999px;
+            background-color: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+          }
+          .swiper-custom-bullet-active {
+            width: 24px;
+            background-color: var(--color-brand, #a3dc2f) !important;
+          }
+        `}</style>
       </div>
+
+      <AnimatePresence>
+        {isModalOpen && (
+          <ConsultationModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

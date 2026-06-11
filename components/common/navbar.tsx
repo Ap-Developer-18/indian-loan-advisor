@@ -8,10 +8,12 @@ import Link from "next/link";
 import Button from "./button";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About Us", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Why Choose Us", href: "#why-us" },
+  { label: "Home", href: "/#home" },
+  { label: "About Us", href: "/#about" },
+  { label: "Products", href: "/#products" },
+  { label: "Why Us", href: "/#why-us" },
+  { label: "Blogs", href: "/#blogs" },
+  { label: "Contact Us", href: "contact-us" },
 ];
 
 export default function Navbar() {
@@ -24,32 +26,36 @@ export default function Navbar() {
           <Link href="/" className="flex items-center">
             <Image width={70} height={50} src="/logo.svg" alt="logo" priority />
           </Link>
-          <div className="hidden md:flex items-center gap-4 text-sm md:text-base font-medium text-muted">
-            {navLinks.map((link) => (
-              <>
-                <div></div>
-                <div></div>
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="hover:text-brand transition-colors"
-                >
-                  {link.label}
-                </a>
-              </>
+          <div className="hidden lg:flex items-center gap-6 text-sm lg:text-base font-medium text-muted">
+            {navLinks.map((link, index) => (
+              <ul key={index}>
+                <li></li>
+                <li></li>
+                <li>
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="hover:text-brand transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              </ul>
             ))}
           </div>
-          <div className="hidden md:flex items-center">
-            <Button
-              variant="primary"
-              className="flex items-center gap-1.5 px-5 py-2.5"
-            >
-              Apply Now <ArrowRight className="w-3.5 h-3.5" />
-            </Button>
+          <div className="hidden lg:flex items-center">
+            <Link href={"#products"}>
+              <Button
+                variant="primary"
+                className="w-full flex items-center justify-center gap-1.5"
+              >
+                Apply Now <ArrowRight className="w-3.5 h-3.5" />
+              </Button>
+            </Link>
           </div>
           <button
             onClick={() => setIsOpen((prev) => !prev)}
-            className="md:hidden text-muted hover:text-brand p-2 border bg-gray-2 border-gray-1 rounded-lg transition-colors"
+            className="lg:hidden text-muted hover:text-brand p-2 border bg-gray-2 border-gray-1 rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
             <svg
@@ -85,7 +91,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden absolute top-24 left-1/2 -translate-x-1/2 z-50 w-[92%] rounded-xl border border-gray-1 bg-background/95 backdrop-blur-md px-5 py-5 shadow-xl"
+            className="lg:hidden absolute top-24 left-1/2 -translate-x-1/2 z-50 w-[calc(100vw-48px)] rounded-xl border border-gray-1 bg-background/95 backdrop-blur-md px-5 py-5 shadow-xl"
           >
             <div className="flex flex-col gap-4 text-muted font-medium">
               {navLinks.map((link) => (
@@ -99,14 +105,14 @@ export default function Navbar() {
                 </a>
               ))}
 
-              <div className="mt-2" onClick={() => setIsOpen(false)}>
+              <Link className="mt-2" href={"#products"}>
                 <Button
                   variant="primary"
                   className="w-full flex items-center justify-center gap-1.5"
                 >
                   Apply Now <ArrowRight className="w-3.5 h-3.5" />
                 </Button>
-              </div>
+              </Link>
             </div>
           </motion.div>
         )}

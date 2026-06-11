@@ -27,24 +27,25 @@ const SOCIAL_LINKS = [
 
 const LINK_SECTIONS = [
   {
-    title: "Useful Links",
+    title: "Services",
     links: [
-      { label: "Home", href: "#home" },
-      { label: "About us", href: "#about" },
-      { label: "Contact", href: "#contact" },
-      { label: "Privacy", href: "#" },
-      { label: "Term & Condition", href: "#" },
+      { label: "OD/CC", href: "/products/od-cc-limit#product-hero" },
+      { label: "Home Loan", href: "/products/home-loan#product-hero" },
+      { label: "Personal Loan", href: "/products/personal-loan#product-hero" },
+      { label: "Business Loan", href: "/products/business-loan#product-hero" },
+      { label: "Project Loan", href: "/products/project-loan#product-hero" },
+      {
+        label: "Loan Against Property",
+        href: "/products/loan-against-property#product-hero",
+      },
     ],
   },
   {
-    title: "Services",
+    title: "Useful Links",
     links: [
-      { label: "OD/CC", href: "#" },
-      { label: "Personal Loan", href: "#" },
-      { label: "Business Loan", href: "#" },
-      { label: "Home Loan", href: "#" },
-      { label: "Project Loan", href: "#" },
-      { label: "Loan Against Property", href: "#" },
+      { label: "Home", href: "/#home" },
+      { label: "About us", href: "/#about" },
+      { label: "Contact", href: "/contact-us" },
     ],
   },
 ];
@@ -52,12 +53,12 @@ const LINK_SECTIONS = [
 export default function Footer() {
   return (
     <footer className="bg-gray-1/60 pt-24 relative overflow-hidden">
-      <div className="container grid grid-cols-1 md:grid-cols-12 gap-12 pb-16">
-        <div className="md:col-span-4 space-y-6">
+      <div className="container grid sm:grid-cols-12 gap-12 pb-16">
+        <div className="sm:col-span-12 lg:col-span-4 space-y-6">
           <Link href="/" className="flex items-center">
             <Image width={70} height={50} src="/logo.svg" alt="logo" priority />
           </Link>
-          <p className="text-sm text-muted font-light leading-relaxed max-w-sm">
+          <p className="text-sm text-muted font-light leading-relaxed lg:max-w-sm">
             We specialize in providing hassle-free loans for every need,
             including personal loans, business loans, home loans and more.
           </p>
@@ -92,27 +93,29 @@ export default function Footer() {
           </div>
         </div>
 
-        {LINK_SECTIONS.map((section, idx) => (
-          <div key={idx} className="md:col-span-2 space-y-5">
-            <h4 className="text-base font-bold text-foreground">
-              {section.title}
-            </h4>
-            <ul className="space-y-3.5 text-sm font-light text-muted">
-              {section.links.map((link, linkIdx) => (
-                <li key={linkIdx}>
-                  <a
-                    href={link.href}
-                    className="hover:text-brand transition-colors block py-0.5"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <div className="sm:col-span-6 lg:col-span-4 flex gap-16 sm:justify-between">
+          {LINK_SECTIONS.map((section, idx) => (
+            <div key={idx} className="col-span-0 lg:col-span-2 space-y-5">
+              <h4 className="text-base font-bold text-foreground">
+                {section.title}
+              </h4>
+              <ul className="space-y-3.5 text-sm font-light text-muted">
+                {section.links.map((link, linkIdx) => (
+                  <li key={linkIdx}>
+                    <a
+                      href={link.href}
+                      className="hover:text-brand transition-colors block py-0.5"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
-        <div className="md:col-span-4 space-y-8">
+        <div className="sm:col-span-6 lg:col-span-4 space-y-8">
           <div className="space-y-4">
             <h4 className="text-base font-bold text-foreground">Newsletter</h4>
             <p className="text-sm text-muted font-light">
@@ -152,7 +155,10 @@ export default function Footer() {
       </div>
 
       <div className="container border-t border-gray-2/20 py-6 flex flex-col md:flex-row items-center justify-center text-sm text-muted">
-        <p>©2026 Indian Loan Advisor. All right reserved.</p>
+        <p>
+          <span className="font-bold underline">@Indian Loan Advisor.</span> All
+          right reserved.
+        </p>
       </div>
     </footer>
   );

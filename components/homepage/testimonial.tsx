@@ -47,12 +47,12 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="pt-16 md:pt-24 pb-16 md:pb-24 bg-background relative overflow-hidden border-t border-gray-2/20"
+      className="pb-24 bg-background relative overflow-hidden"
     >
       <div className="absolute -left-32 top-1/4 w-96 h-96 bg-radial-glow opacity-25 pointer-events-none blur-3xl" />
       <div className="absolute -right-32 bottom-1/4 size-125 bg-radial-glow opacity-35 pointer-events-none blur-3xl z-10" />
 
-      <div className="container space-y-12 relative z-20">
+      <div className="container space-y-4 lg:space-y-12 relative z-20">
         <SectionHeader
           badgeText="Client Endorsements"
           badgeIcon={MessageSquare}

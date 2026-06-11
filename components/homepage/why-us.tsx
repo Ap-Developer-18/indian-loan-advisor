@@ -1,11 +1,10 @@
 "use client";
 import { motion } from "framer-motion";
 import { Zap, Percent, Shield, HelpCircle, Focus } from "lucide-react";
-import Badge from "../common/badge";
 import { slideInLeft, slideInRight } from "../framer/variants";
 import SectionHeader from "../common/section-header";
 
-const WHY_DATA = [
+const whyData = [
   {
     icon: Zap,
     title: "Less Time in the Process",
@@ -30,14 +29,14 @@ const WHY_DATA = [
 
 export default function WhyUs() {
   return (
-    <section id="why-us" className="py-16 md:py-24 lg:py-30 container">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+    <section id="why-us" className="container">
+      <div className="grid grid-cols-1 scroll-mt-52 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
         <motion.div
           variants={slideInLeft}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="lg:col-span-6 space-y-6"
+          className="col-span-6 xl:col-span-7 space-y-6"
         >
           <SectionHeader
             badgeIcon={Focus}
@@ -47,7 +46,7 @@ export default function WhyUs() {
             alignment="left"
           />
           <div className="space-y-3">
-            {WHY_DATA.map((item, idx) => {
+            {whyData.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <div
@@ -76,7 +75,7 @@ export default function WhyUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="lg:col-span-6 relative w-full h-full aspect-4/3 rounded-tl-[150px] rounded-br-[150px] overflow-hidden"
+          className="col-span-6 xl:col-span-5 h-90 sm:h-120 lg:h-full lg:border-r-4 lg:border-t-4 lg:border-brand lg:rounded-tl-[150px] max-lg:rounded-xl lg:rounded-br-[150px] relative w-full overflow-hidden"
         >
           <img
             src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=30"

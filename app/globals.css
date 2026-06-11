@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --primary-dark: #0B0B0C;
+  --primary-dark: #1b1b1d;
   --primary-brand: #A3DC2F;
   --accent-mint: #00D1A0;
   --accent-yellow: #FFC700;
@@ -10,7 +10,7 @@
   --accent-teal: #00B4D8;
   --accent-brown: #B07D62;
   --gray-1: #161616;
-  --gray-2: #242424;
+  --gray-2: #383737;
   --gray-3: #555555 --grey-2-alt: #2E2E30;
   --gray-5: #E5E5EA;
   --gray-6: #F2F2F7;

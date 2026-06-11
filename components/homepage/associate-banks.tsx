@@ -4,40 +4,35 @@ import Badge from "../common/badge";
 
 const bankLogos = [
   {
-    name: "Apex Capital",
-    logo: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=240&h=80&q=80",
+    name: "Anand Rathi Bank",
+    logo: "/anand-rathi.php",
   },
   {
-    name: "Vertex Trust",
-    logo: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=240&h=80&q=80",
+    name: "Axis Bank",
+    logo: "/axis-bank.png",
   },
   {
-    name: "Quantum Bank",
-    logo: "https://images.unsplash.com/photo-1618005198143-e5283b519a7f?auto=format&fit=crop&w=240&h=80&q=80",
+    name: "Capri Bank",
+    logo: "/capri.png",
   },
   {
-    name: "Alpha Institutional",
-    logo: "https://images.unsplash.com/photo-1633167606207-d840b5070fc2?auto=format&fit=crop&w=240&h=80&q=80",
+    name: "IIFL Finance",
+    logo: "/iifl.png",
   },
   {
-    name: "Nexus Credit",
-    logo: "https://images.unsplash.com/photo-1634973357973-f2ed255753e1?auto=format&fit=crop&w=240&h=80&q=80",
+    name: "LendingKart",
+    logo: "/landing-cart.png",
+  },
+  {
+    name: "Equitas",
+    logo: "/equitas.png",
   },
 ];
-
 export default function AssociateBanks() {
   return (
-    <section className="bg-background relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-37 bg-radial-glow pointer-events-none opacity-30 blur-2xl z-10" />
-
-      <div className="container space-y-8 relative z-20">
-        <div className="flex justify-center">
-          <Badge
-            text="Institutional Integrations"
-            icon={<Landmark className="w-3.5 h-3.5" />}
-          />
-        </div>
-        <div className="relative w-full flex overflow-x-hidden mask-gradient py-4">
+    <section className="bg-background pt-24 relative overflow-hidden">
+      <div className="container relative z-20">
+        <div className="relative w-full flex overflow-x-hidden mask-gradient">
           <div className="animate-marquee flex whitespace-nowrap items-center gap-6 shrink-0">
             {[...bankLogos, ...bankLogos, ...bankLogos].map((bank, idx) => (
               <div
@@ -47,7 +42,7 @@ export default function AssociateBanks() {
                 <img
                   src={bank.logo}
                   alt={bank.name}
-                  className="w-full h-full object-cover rounded-lg opacity-80 group-hover:opacity-100 transition-opacity duration-200"
+                  className="w-full h-full object-cover rounded-lg opacity-100 group-hover:opacity-100 transition-opacity duration-200"
                 />
               </div>
             ))}

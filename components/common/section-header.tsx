@@ -30,9 +30,7 @@ export default function SectionHeader({
     <div
       className={`flex flex-col max-w-3xl space-y-4 ${alignmentStyles[alignment]} ${className}`}
     >
-      <div>
-        <Badge text={badgeText} icon={<Icon className="w-4 h-4" />} />
-      </div>
+      <Badge text={badgeText} icon={<Icon className="w-4 h-4" />} />
       <h2 className="text-3xl md:text-4xl font-bold text-foreground">
         {title}
       </h2>
