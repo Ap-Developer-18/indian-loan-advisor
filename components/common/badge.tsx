@@ -49,7 +49,6 @@ export default function Badge({
       }}
       whileHover={{
         boxShadow: "0 0 60px rgba(var(--brand),0.6)",
-        borderColor: "rgba(var(--brand),0.8)",
       }}
       whileTap={{ scale: 0.97 }}
       className={`

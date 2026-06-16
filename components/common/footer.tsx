@@ -1,7 +1,7 @@
 "use client";
-
-import Image from "next/image";
-import Link from "next/link";
+import { useState } from "react";
+import PrivacyPolicyModal from "../popups/privacy";
+import TermsModal from "../popups/term-sheet";
 
 const SOCIAL_LINKS = [
   {
@@ -27,9 +27,16 @@ const SOCIAL_LINKS = [
 
 const LINK_SECTIONS = [
   {
-    title: "Services",
+    title: "Our Products",
     links: [
-      { label: "OD/CC", href: "/products/od-cc-limit#product-hero" },
+      {
+        label: "Cash Credit Limit",
+        href: "/products/cash-credit-limit#product-hero",
+      },
+      {
+        label: "Over Draft Limit",
+        href: "/products/overdraft-limit#product-hero",
+      },
       { label: "Home Loan", href: "/products/home-loan#product-hero" },
       { label: "Personal Loan", href: "/products/personal-loan#product-hero" },
       { label: "Business Loan", href: "/products/business-loan#product-hero" },
@@ -43,123 +50,255 @@ const LINK_SECTIONS = [
   {
     title: "Useful Links",
     links: [
-      { label: "Home", href: "/#home" },
+      { label: "Home", href: "/#hero" },
       { label: "About us", href: "/#about" },
-      { label: "Contact", href: "/contact-us" },
+      { label: "Privacy Policy", href: "#privacy" },
+      { label: "Terms & Sheet", href: "#terms" },
     ],
   },
 ];
 
 export default function Footer() {
-  return (
-    <footer className="bg-gray-1/60 pt-24 relative overflow-hidden">
-      <div className="container grid sm:grid-cols-12 gap-12 pb-16">
-        <div className="sm:col-span-12 lg:col-span-4 space-y-6">
-          <Link href="/" className="flex items-center">
-            <Image width={70} height={50} src="/logo.svg" alt="logo" priority />
-          </Link>
-          <p className="text-sm text-muted font-light leading-relaxed lg:max-w-sm">
-            We specialize in providing hassle-free loans for every need,
-            including personal loans, business loans, home loans and more.
-          </p>
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error" | "duplicate"
+  >("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [isTermsOpen, setIsTermsOpen] = useState(false);
 
-          <div className="flex items-center gap-3.5 pt-2">
-            {SOCIAL_LINKS.map((social, index) => (
-              <a
-                key={index}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-gray-1 border border-gray-2 flex items-center justify-center text-muted hover:text-brand hover:border-brand/40 shadow-md transition-all duration-300"
-              >
-                {social.isStroke ? (
+  const handleSubscribe = async () => {
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus("error");
+      setErrorMsg("Please enter a valid email.");
+      return;
+    }
+
+    setStatus("loading");
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus("success");
+        setEmail("");
+      } else if (res.status === 409) {
+        setStatus("duplicate");
+        setErrorMsg("This email is already subscribed.");
+      } else {
+        setStatus("error");
+        setErrorMsg(data.error || "Something went wrong.");
+      }
+    } catch {
+      setStatus("error");
+      setErrorMsg("Network error. Please try again.");
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") handleSubscribe();
+  };
+
+  return (
+    <footer className="bg-gray-1/60 pt-16 relative overflow-hidden">
+      <div className="container flex max-lg:flex-col justify-center max-lg:items-center lg:justify-between gap-6 lg:gap-16 pb-16 text-center lg:text-left items-center lg:items-stretch">
+        <div className="w-fit max-lg:mx-auto flex lg:w-xs flex-col items-center lg:items-start justify-center">
+          <a
+            href="/#hero"
+            className="border w-full max-sm:w-50 max-lg:w-60 border-gray-2 bg-gray-1 p-3 rounded-md"
+          >
+            <img
+              width={55}
+              height={55}
+              src="/tl-logo.png"
+              alt="logo"
+              className="object-cover select-none pointer-events-none w-full rounded-md"
+            />
+          </a>
+        </div>
+        <div className="flex flex-col lg:flex-row justify-center lg:w-sm lg:justify-start gap-12 lg:gap-16">
+          <div className="lg:col-span-4 space-y-8 flex flex-col items-center lg:items-start justify-center lg:justify-start w-full max-w-md mx-auto lg:mx-0">
+            <div className="space-y-2 w-full flex flex-col items-center lg:items-start">
+              <p className="text-base text-muted mb-6">
+                We specialize in providing hassle-free loans for every need,
+                including personal loans, business loans, home loans and more.
+              </p>
+              <h4 className="text-base font-bold text-foreground">
+                Subscribe For Newsletter
+              </h4>
+              {status === "success" ? (
+                <div className="flex items-center justify-center lg:justify-start gap-2 text-sm text-brand bg-brand/10 border border-brand/20 rounded-xl px-4 py-3 w-full">
                   <svg
-                    className="w-4 h-4 stroke-current fill-none stroke-2"
+                    className="w-4 h-4 fill-current shrink-0"
                     viewBox="0 0 24 24"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
                   >
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                   </svg>
-                ) : (
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                    <path d={social.svgPath} />
-                  </svg>
-                )}
-              </a>
-            ))}
+                  <span>You&apos;re subscribed. Thank you!</span>
+                </div>
+              ) : (
+                <div className="w-full">
+                  <div
+                    className={`flex rounded-xl overflow-hidden border bg-background p-1.5 transition-colors w-full ${
+                      status === "error" || status === "duplicate"
+                        ? "border-red-500/50"
+                        : "border-gray-2 focus-within:border-brand/40"
+                    }`}
+                  >
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (status !== "idle") setStatus("idle");
+                      }}
+                      onKeyDown={handleKeyDown}
+                      disabled={status === "loading"}
+                      className="bg-transparent text-sm px-3 py-1 outline-none w-full text-center lg:text-left text-foreground disabled:opacity-50"
+                    />
+                    <button
+                      onClick={handleSubscribe}
+                      disabled={status === "loading"}
+                      className="bg-brand text-background text-sm font-bold px-4 rounded-lg hover:opacity-95 transition-opacity cursor-pointer whitespace-nowrap"
+                    >
+                      {status === "loading" ? (
+                        <svg
+                          className="w-4 h-4 animate-spin"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2.5}
+                        >
+                          <path strokeLinecap="round" d="M12 3a9 9 0 1 0 9 9" />
+                        </svg>
+                      ) : (
+                        "SignUp"
+                      )}
+                    </button>
+                  </div>
+                  {(status === "error" || status === "duplicate") && (
+                    <p className="text-xs text-red-400 mt-1 pl-1 text-center lg:text-left">
+                      {errorMsg}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+            <div className="flex flex-col items-center lg:flex-row gap-3 pt-2 w-full lg:w-auto">
+              <div className="w-10 h-10 rounded-xl bg-brand-muted border border-brand/20 flex items-center justify-center text-brand shrink-0">
+                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                </svg>
+              </div>
+              <div className="space-y-0.5 text-center lg:text-left">
+                <span className="text-sm text-muted font-light block leading-none">
+                  Call to Our Experts
+                </span>
+                <a
+                  href="tel:+918595332014"
+                  className="text-sm font-bold text-foreground hover:text-brand transition-colors block"
+                >
+                  +91 8595 332 014
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className="sm:col-span-6 lg:col-span-4 flex gap-16 sm:justify-between">
+        <div className="border border-gray-2 max-sm:w-full max-lg:w-2/3 gap-2 bg-gray-1 p-6 lg:w-sm rounded-md flex justify-between">
           {LINK_SECTIONS.map((section, idx) => (
-            <div key={idx} className="col-span-0 lg:col-span-2 space-y-5">
-              <h4 className="text-base font-bold text-foreground">
+            <div
+              key={idx}
+              className="space-y-3 flex flex-col items-center lg:items-start w-full sm:w-auto"
+            >
+              <h4 className="text-base w-full text-center border-b border-brand font-bold text-foreground tracking-wide">
                 {section.title}
               </h4>
-              <ul className="space-y-3.5 text-sm font-light text-muted">
+              <ul className="space-y-2 w-full text-sm font-light text-muted flex flex-col items-center lg:items-start">
                 {section.links.map((link, linkIdx) => (
-                  <li key={linkIdx}>
-                    <a
-                      href={link.href}
-                      className="hover:text-brand transition-colors block py-0.5"
-                    >
-                      {link.label}
-                    </a>
+                  <li className="w-full" key={linkIdx}>
+                    {link.label === "Privacy Policy" ? (
+                      <button
+                        type="button"
+                        onClick={() => setIsPrivacyOpen(true)}
+                        className="hover:text-brand text-center! transition-colors block py-0.5 w-full cursor-pointer"
+                      >
+                        {link.label}
+                      </button>
+                    ) : link.label === "Terms & Sheet" ? (
+                      <button
+                        type="button"
+                        onClick={() => setIsTermsOpen(true)}
+                        className="hover:text-brand text-center! transition-colors block py-0.5 w-full cursor-pointer"
+                      >
+                        {link.label}
+                      </button>
+                    ) : (
+                      <a
+                        href={link.href}
+                        className="hover:text-brand text-center! transition-colors block py-0.5"
+                      >
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
+      </div>
+      <div className="container">
+        <div className="border-t border-gray-2/20 py-6 flex items-center justify-center text-sm text-muted text-center">
+          <div className="flex justify-between max-lg:flex-col w-full items-center gap-4">
+            <div className="flex gap-2">
+              {SOCIAL_LINKS.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-gray-1 border border-gray-2 flex items-center justify-center text-muted hover:text-brand hover:border-brand/40 shadow-md transition-all duration-300"
+                >
+                  {social.isStroke ? (
+                    <svg
+                      className="w-4 h-4 stroke-current fill-none stroke-2"
+                      viewBox="0 0 24 24"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                    </svg>
+                  ) : (
+                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                      <path d={social.svgPath} />
+                    </svg>
+                  )}
+                </a>
+              ))}
+            </div>
 
-        <div className="sm:col-span-6 lg:col-span-4 space-y-8">
-          <div className="space-y-4">
-            <h4 className="text-base font-bold text-foreground">Newsletter</h4>
-            <p className="text-sm text-muted font-light">
-              Subscribe our newsletter
+            <p className="border border-gray-2 bg-gray-1 p-3 rounded-md">
+              <span className="font-bold underline">@Trustified Loan.</span> All
+              rights reserved.
             </p>
-            <div className="flex rounded-xl overflow-hidden border border-gray-2 bg-background p-1.5 focus-within:border-brand/40 transition-colors w-full">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="bg-transparent text-sm px-3 py-1 outline-none w-full text-foreground"
-              />
-              <button className="bg-brand text-background text-sm font-bold px-4 rounded-lg hover:opacity-95 transition-opacity cursor-pointer whitespace-nowrap">
-                SignUp
-              </button>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 pt-2">
-            <div className="w-10 h-10 rounded-xl bg-brand-muted border border-brand/20 flex items-center justify-center text-brand shrink-0">
-              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                <path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-              </svg>
-            </div>
-            <div className="space-y-0.5">
-              <span className="text-sm text-muted font-light block leading-none">
-                Call to Our Experts
-              </span>
-              <a
-                href="tel:+918595332014"
-                className="text-sm font-bold text-foreground hover:text-brand transition-colors block"
-              >
-                +91 8595 332 014
-              </a>
-            </div>
           </div>
         </div>
       </div>
 
-      <div className="container border-t border-gray-2/20 py-6 flex flex-col md:flex-row items-center justify-center text-sm text-muted">
-        <p>
-          <span className="font-bold underline">@Indian Loan Advisor.</span> All
-          right reserved.
-        </p>
-      </div>
+      <PrivacyPolicyModal
+        isOpen={isPrivacyOpen}
+        onClose={() => setIsPrivacyOpen(false)}
+      />
+      <TermsModal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} />
     </footer>
   );
 }

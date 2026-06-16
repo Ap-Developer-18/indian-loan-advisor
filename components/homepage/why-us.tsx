@@ -29,8 +29,8 @@ const whyData = [
 
 export default function WhyUs() {
   return (
-    <section id="why-us" className="container">
-      <div className="grid grid-cols-1 scroll-mt-52 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
+    <section id="why-us" className="container scroll-mt-30">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
         <motion.div
           variants={slideInLeft}
           initial="hidden"

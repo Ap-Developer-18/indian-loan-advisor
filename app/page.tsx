@@ -7,10 +7,13 @@ import Services from "@/components/homepage/our-product";
 import Testimonials from "@/components/homepage/testimonial";
 import WhyUs from "@/components/homepage/why-us";
 import BlogListingPage from "./blog/page";
+import ContactPage from "@/components/contact-us/page";
+import BackToTopButton from "@/components/common/back-to-top";
 
 export default function Home() {
   return (
     <>
+      <BackToTopButton />
       <Navbar />
       <main className="relative overflow-hidden min-h-screen bg-background text-foreground">
         <Hero />
@@ -20,6 +23,7 @@ export default function Home() {
         <AssociateBanks />
         <BlogListingPage />
         <Testimonials />
+        <ContactPage />
       </main>
       <Footer />
     </>

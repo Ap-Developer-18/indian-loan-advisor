@@ -20,10 +20,9 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative scroll-mt-32 min-h-[calc(100vh-106px)] overflow-hidden flex gap-16 pt-24 flex-col items-center justify-center text-center"
+      className="relative scroll-mt-20 min-h-[calc(100vh-106px)] flex gap-16 pt-24 flex-col items-center justify-center text-center"
     >
-      <div className="absolute -top-30 lg:top-0 left-1/2 -translate-x-1/2 size-225 bg-radial-glow pointer-events-none z-0 opacity-75" />
-
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 size-150 bg-brand/7 rounded-full blur-[400px] pointer-events-none z-0" />
       <motion.div
         initial="hidden"
         animate="visible"
@@ -34,17 +33,13 @@ export default function Hero() {
         className="container relative z-10 flex flex-col items-center"
       >
         <motion.div
+          className="mb-3"
           variants={{
             hidden: { opacity: 0, y: 15 },
             visible: { opacity: 1, y: 0 },
           }}
-          className="mb-4 lg:mb-6"
         >
-          <Badge
-            pillText="Trusted"
-            text="Struggling With Finance"
-            showArrow={true}
-          />
+          <Badge pillText="Struggling" text="With Finance?" className="mb-2" />
         </motion.div>
         <HighlightWords
           words={["Get", "The", "Perfect", "Stress", "Free", "Loan"]}

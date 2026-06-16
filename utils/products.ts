@@ -7,17 +7,27 @@ import {
   Landmark,
   Layers,
   User,
+  CreditCard,
 } from "lucide-react";
 
 export const servicesData = [
   {
-    slug: "od-cc-limit",
-    title: "OD / CC Limit",
-    desc: "Need working capital for your business? Our Overdraft (OD) and Cash Credit (CC) facilities provide seamless financial support to keep your business running smoothly.",
-    icon: Briefcase,
+    slug: "cash-credit-limit",
+    title: "Cash Credit Limit",
+    desc: "Our Cash Credit (CC) facility provides a revolving credit line to manage your business expenses and working capital seamlessly.",
+    icon: CreditCard,
     price: "Low Premium",
-    counter: "+1.2k Active",
+    counter: "+800 Active",
     img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80",
+  },
+  {
+    slug: "overdraft-limit",
+    title: "Over Draft Limit",
+    desc: "Our Over Draft (OD) facility lets you withdraw beyond your account balance, giving your business instant liquidity whenever you need it.",
+    icon: Briefcase,
+    price: "Flexible Cap",
+    counter: "+420 Active",
+    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=400&q=80",
   },
   {
     slug: "home-loan",
@@ -49,7 +59,7 @@ export const servicesData = [
   {
     slug: "project-loan",
     title: "Project Loan",
-    desc: "Whether you're launching a new venture, expanding an existing business, or funding large-scale projects, we provide high-value loans with flexible terms and quick approvals to support your goals.",
+    desc: "Whether you're launching a new venture, expanding an existing business, or funding large-scale projects, we provide high-value loans with flexible terms and quick approvals.",
     icon: HardHat,
     price: "Project Plan",
     counter: "+150 Projects",
@@ -58,7 +68,7 @@ export const servicesData = [
   {
     slug: "loan-against-property",
     title: "Loan Against Property",
-    desc: "Need funds for business expansion, education, medical emergencies, or personal needs? Get a high-value loan by leveraging your property at low interest rates and flexible repayment options.",
+    desc: "Need funds for business expansion, education, medical emergencies, or personal needs? Get a high-value loan by leveraging your property at low interest rates.",
     icon: Building,
     price: "Asset Value",
     counter: "+680 Assets",
@@ -67,7 +77,7 @@ export const servicesData = [
   {
     slug: "govt-subsidy-scheme",
     title: "Govt Subsidy Scheme",
-    desc: "Looking for expert guidance on government subsidies? We help businesses and individuals navigate and avail government subsidy schemes to reduce financial burdens and boost growth.",
+    desc: "Looking for expert guidance on government subsidies? We help businesses and individuals navigate and avail government subsidy schemes to reduce financial burdens.",
     icon: Landmark,
     price: "Govt Verified",
     counter: "+920 Grants",
@@ -76,26 +86,48 @@ export const servicesData = [
 ];
 
 export const productsData: Record<string, ProductData> = {
-  "od-cc-limit": {
-    slug: "od-cc-limit",
-    icon: Briefcase,
+  "cash-credit-limit": {
+    slug: "cash-credit-limit",
+    icon: CreditCard,
     badge: "Working Capital",
-    tag: "OD / CC",
-    title: "Overdraft & Cash Credit",
-    tagline: "Flexible Funding for Your Business!",
+    tag: "CC Limit",
+    title: "Cash Credit Limit",
+    tagline: "Revolving Credit for Your Business!",
     heroDesc:
-      "Need working capital for your business? Our Overdraft (OD) and Cash Credit (CC) facilities provide seamless financial support to keep your business running smoothly.",
+      "Our Cash Credit (CC) facility provides a revolving credit line that helps you manage working capital, cover short-term expenses, and grow your business without disruption.",
     about:
-      "Running a business comes with unpredictable financial needs. Our Overdraft (OD) and Cash Credit (CC) facilities provide instant access to funds, helping you manage cash flow, meet working capital requirements, and grow your business without disruption. Whether you need to cover short-term expenses, manage cash flow, or seize new business opportunities, our OD & CC loans provide the flexibility you need.",
-    benefitsTitle: "Benefits of OD & CC Loans",
+      "A Cash Credit (CC) limit is a short-term credit facility extended by banks to businesses. It allows you to withdraw funds up to a sanctioned limit and repay flexibly. Interest is charged only on the amount utilized, making it a cost-effective solution for managing day-to-day business operations. Whether you need to cover short-term expenses, manage cash flow, or seize new business opportunities, our CC facility provides the flexibility you need.",
+    benefitsTitle: "Benefits of Cash Credit Limit",
     benefits: [
-      "Instant Access to Funds – Withdraw money as needed",
-      "Pay Interest Only on Usage – Cost-effective borrowing",
-      "Flexible Repayment – Repay at your convenience",
+      "Revolving Credit Line – Withdraw and repay as needed without reapplying",
+      "Pay Interest Only on Usage – Cost-effective borrowing at all times",
+      "Flexible Repayment – Repay at your convenience without fixed EMIs",
       "Supports Business Growth – Helps manage working capital smoothly",
       "Minimal Documentation & Quick Approval – Fast processing for hassle-free borrowing",
     ],
     img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80",
+    accentColor: "var(--color-brand)",
+  },
+  "overdraft-limit": {
+    slug: "overdraft-limit",
+    icon: Briefcase,
+    badge: "Working Capital",
+    tag: "OD Limit",
+    title: "Over Draft Limit",
+    tagline: "Instant Liquidity When You Need It!",
+    heroDesc:
+      "Our Over Draft (OD) facility lets your business withdraw beyond the available account balance, providing instant access to funds for urgent financial needs.",
+    about:
+      "An Over Draft (OD) limit is a credit facility linked to your current account that allows you to overdraw beyond your balance up to a pre-approved limit. It's ideal for businesses that face sudden cash flow gaps and need instant liquidity without lengthy loan processing. Our team of experts ensures that you get the best OD facility, guiding you through every step of the process.",
+    benefitsTitle: "Benefits of Over Draft Limit",
+    benefits: [
+      "Instant Access to Funds – Withdraw beyond your balance anytime",
+      "Pay Interest Only on Usage – Cost-effective short-term borrowing",
+      "Flexible Repayment – No fixed EMIs, repay as funds become available",
+      "Linked to Current Account – Seamless integration with your business account",
+      "Minimal Documentation & Quick Approval – Fast processing for hassle-free borrowing",
+    ],
+    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=900&q=80",
     accentColor: "var(--color-brand)",
   },
   "home-loan": {

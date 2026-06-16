@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --primary-dark: #1b1b1d;
+  --primary-dark: #101010;
   --primary-brand: #A3DC2F;
   --accent-mint: #00D1A0;
   --accent-yellow: #FFC700;
@@ -113,12 +113,9 @@ html {
   mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent);
 }
 
-/* High Contrast Pill Testimonials Navigation */
 .custom-swiper-pagination .swiper-pagination-bullet {
   background: #ffffff !important;
-  /* Pure White base for visibility */
   opacity: 0.25;
-  /* Subtle blend when inactive */
   width: 14px;
   height: 4px;
   border-radius: 999px;
@@ -126,7 +123,6 @@ html {
   cursor: pointer;
 }
 
-/* On Hover on Track dots */
 .custom-swiper-pagination .swiper-pagination-bullet:hover {
   opacity: 0.5;
 }
@@ -136,4 +132,8 @@ html {
   opacity: 1;
   width: 32px;
   box-shadow: 0 0 12px rgba(163, 220, 47, 0.6);
+}
+
+#products .swiper-pagination {
+  @apply !-left-1
 }

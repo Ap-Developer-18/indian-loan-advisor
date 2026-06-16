@@ -8,7 +8,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="scroll-mt-48 py-18 lg:py-24 relative overflow-hidden"
+      className="scroll-mt-12 lg:scroll-mt-6 py-18 lg:py-24 relative overflow-hidden"
     >
       <div className="absolute -left-40 top-1/4 w-96 h-96 bg-brand/5 pointer-events-none blur-3xl" />
       <div className="absolute -right-40 bottom-1/4 w-96 h-96 bg-brand/5 pointer-events-none blur-3xl" />
@@ -26,7 +26,7 @@ export default function About() {
               badgeText="About Us"
               badgeIcon={User2}
               title="Fast, Reliable, and Hassle-Free Loans – Anytime, Anywhere!"
-              subtitle="Welcome to Indian Loan Advisor, your trusted partner in financial solutions. We specialize in providing hassle-free loans for every need, including personal loans, business loans, home loans, project loans, and more."
+              subtitle="Welcome to Trustified Loan, your trusted partner in financial solutions. We specialize in providing hassle-free loans for every need, including personal loans, business loans, home loans, project loans, and more."
               alignment="left"
             />
 
@@ -39,7 +39,7 @@ export default function About() {
               borrowing experience.
             </p>
             <p className="text-muted font-light leading-relaxed text-sm sm:text-base">
-              At Indian Loan Advisor, we believe in making finance simple and
+              At Trustified Loan, we believe in making finance simple and
               accessible. Whether you need funds for personal expenses, business
               growth, or a dream home, we are here to support your financial
               journey.

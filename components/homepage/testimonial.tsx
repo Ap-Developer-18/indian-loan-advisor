@@ -13,7 +13,7 @@ const TESTIMONIALS_DATA = [
     name: "Amit Khanna",
     role: "Real Estate Developer",
     review:
-      "Securing project funding through Indian Loan Advisor was lightning fast. Their automated pipeline and expert alignment saved us millions in capital deployment delays. Absolute game-changer for infrastructure projects.",
+      "Securing project funding through Trustified Loan was lightning fast. Their automated pipeline and expert alignment saved us millions in capital deployment delays. Absolute game-changer for infrastructure projects.",
     rating: 5,
     avatar: "A",
   },

@@ -6,26 +6,37 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "./button";
+import ConsultationModal from "../popups/consultation";
 
 const navLinks = [
-  { label: "Home", href: "/#home" },
   { label: "About Us", href: "/#about" },
   { label: "Products", href: "/#products" },
   { label: "Why Us", href: "/#why-us" },
   { label: "Blogs", href: "/#blogs" },
-  { label: "Contact Us", href: "contact-us" },
+  { label: "Contact Us", href: "/#contact-us" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="sticky container top-4 z-50 w-full px-4">
       <nav className="max-w-7xl mx-auto bg-background/75 backdrop-blur-md border rounded-xl border-gray-2/80 shadow-sm transition-all duration-300">
         <div className="flex items-center justify-between h-20 px-4 sm:px-6">
-          <Link href="/" className="flex items-center">
-            <Image width={70} height={50} src="/logo.svg" alt="logo" priority />
-          </Link>
+          <a
+            href="/#hero"
+            className="flex gap-2 items-center text-2xl lg:text-3xl font-extrabold text-white"
+          >
+            <Image
+              className="rounded-full size-11 lg:size-13"
+              width={55}
+              height={55}
+              src={"/logo.webp"}
+              alt="logo"
+            />
+            Trustified Loan
+          </a>
           <div className="hidden lg:flex items-center gap-6 text-sm lg:text-base font-medium text-muted">
             {navLinks.map((link, index) => (
               <ul key={index}>
@@ -44,14 +55,13 @@ export default function Navbar() {
             ))}
           </div>
           <div className="hidden lg:flex items-center">
-            <Link href={"#products"}>
-              <Button
-                variant="primary"
-                className="w-full flex items-center justify-center gap-1.5"
-              >
-                Apply Now <ArrowRight className="w-3.5 h-3.5" />
-              </Button>
-            </Link>
+            <Button
+              onClick={() => setIsModalOpen(true)}
+              variant="primary"
+              className="w-full flex items-center justify-center gap-1.5"
+            >
+              Quick Apply
+            </Button>
           </div>
           <button
             onClick={() => setIsOpen((prev) => !prev)}
@@ -104,17 +114,26 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
-
-              <Link className="mt-2" href={"#products"}>
-                <Button
-                  variant="primary"
-                  className="w-full flex items-center justify-center gap-1.5"
-                >
-                  Apply Now <ArrowRight className="w-3.5 h-3.5" />
-                </Button>
-              </Link>
+              <Button
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsModalOpen(true);
+                }}
+                variant="primary"
+                className="w-full mt-2 flex items-center justify-center gap-1.5"
+              >
+                Quick Apply
+              </Button>
             </div>
           </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isModalOpen && (
+          <ConsultationModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+          />
         )}
       </AnimatePresence>
     </div>

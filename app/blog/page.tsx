@@ -1,12 +1,11 @@
 "use client";
-import Link from "next/link";
 import { Calendar, Clock, ArrowRight, TrendingUp } from "lucide-react";
 import { BLOG_POSTS } from "@/utils/blogs";
 import SectionHeader from "@/components/common/section-header";
 
 export default function BlogListingPage() {
   return (
-    <section id="blog-section" className="container py-24 relative">
+    <section id="blogs" className="container py-24 relative scroll-mt-6">
       <div className="absolute size-200 -left-100 inset-0 bg-radial-glow pointer-events-none z-0" />
       <div className="relative z-10 space-y-6 lg:space-y-12">
         <SectionHeader
@@ -14,7 +13,7 @@ export default function BlogListingPage() {
           badgeText="Insights & Knowledge"
           badgeIcon={TrendingUp}
           title="Financial Advisory Corner"
-          subtitle="Read financial insights, tips, and loan strategies compiled by senior advisors at Indian Loan Advisor, Faridabad."
+          subtitle="Read financial insights, tips, and loan strategies compiled by senior advisors at Trustified Loan, Faridabad."
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {BLOG_POSTS.map((post) => (
@@ -54,13 +53,13 @@ export default function BlogListingPage() {
                     {post.excerpt}
                   </p>
                 </div>
-                <Link
-                  href={`/blog/${post.slug}`}
+                <a
+                  href={`/blog/${post.slug}#blog-details`}
                   className="inline-flex items-center gap-2 text-sm font-bold text-brand group-hover:text-foreground transition-colors pt-2 self-start cursor-pointer"
                 >
                   Read Full Article{" "}
                   <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                </a>
               </div>
             </article>
           ))}
