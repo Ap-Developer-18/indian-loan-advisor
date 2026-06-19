@@ -137,8 +137,10 @@ const ProductDetails = ({
       </section>
 
       <div className="container pb-24 space-y-8">
-        <Badge text="Explore More" />
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="flex justify-center">
+          <Badge text="Explore More" />
+        </div>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
           {otherProducts.map((otherProd, idx) => {
             const OtherIcon = otherProd.icon;
             return (
@@ -152,7 +154,7 @@ const ProductDetails = ({
                 whileHover={{ y: -4, borderColor: "rgba(163,220,47,0.4)" }}
                 className="flex items-center justify-between p-4 sm:p-5 bg-background/40 border border-gray-2/50 rounded-xl group transition-all duration-300 hover:bg-background/80 cursor-pointer backdrop-blur-sm"
               >
-                <div className="flex max-sm:flex-col sm:items-center gap-4">
+                <div className="flex items-center gap-4">
                   <div className="p-2.5 w-fit rounded-lg bg-brand/10 text-brand group-hover:bg-brand group-hover:text-black transition-colors duration-300">
                     {OtherIcon && <OtherIcon className="w-5 h-5" />}
                   </div>
@@ -161,7 +163,7 @@ const ProductDetails = ({
                       {otherProd.title}
                     </h4>
                     <p className="text-xs text-muted font-light mt-0.5">
-                      Click To Open Details
+                      Click For More Details
                     </p>
                   </div>
                 </div>

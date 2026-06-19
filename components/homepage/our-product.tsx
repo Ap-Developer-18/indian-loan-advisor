@@ -158,7 +158,7 @@ function ServiceCard({
     >
       <a
         href={`/products/${srv.slug}#product-hero`}
-        className="text-brand flex items-center gap-1 font-bold group/btn"
+        className="text-brand w-full inline-block group/btn"
       >
         <div className="relative aspect-4/3 overflow-hidden rounded-t-xl">
           <img
@@ -186,7 +186,7 @@ function ServiceCard({
       <div className="p-5 flex items-center justify-between text-sm mt-auto">
         <button
           onClick={() => setIsModalOpen && setIsModalOpen(true)}
-          className="text-brand underline flex items-center gap-1 font-bold group/btn"
+          className="text-brand cursor-pointer underline flex items-center gap-1 font-bold group/btn"
         >
           Quick Apply
         </button>

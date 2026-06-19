@@ -76,8 +76,8 @@ export const servicesData = [
   },
   {
     slug: "govt-subsidy-scheme",
-    title: "Govt Subsidy Scheme",
-    desc: "Looking for expert guidance on government subsidies? We help businesses and individuals navigate and avail government subsidy schemes to reduce financial burdens.",
+    title: "Govt Subsidy",
+    desc: "Looking for expert guidance on government subsidies? We help businesses and individuals navigate and avail government subsidy to reduce financial burdens.",
     icon: Landmark,
     price: "Govt Verified",
     counter: "+920 Grants",
@@ -302,10 +302,10 @@ export const productsData: Record<string, ProductData> = {
     icon: Landmark,
     badge: "Government Programs",
     tag: "Govt Subsidy",
-    title: "Government Subsidy Scheme Consultant",
+    title: "Government Subsidy",
     tagline: "Unlock the Benefits of Government Schemes!",
     heroDesc:
-      "Navigating through the complexities of Government Subsidy Schemes can be challenging, but with the right guidance, you can make the most of opportunities available.",
+      "Navigating through the complexities of Government Subsidy can be challenging, but with the right guidance, you can make the most of opportunities available.",
     about:
       "As expert consultants, we help individuals and businesses understand, apply for, and benefit from various subsidy schemes, grants, and financial support programs launched by the government. Let us help you unlock the full potential of available government subsidies and grants, making your business or personal goals easier to achieve.",
     benefitsTitle: "Why Choose Our Consultancy?",
@@ -318,7 +318,7 @@ export const productsData: Record<string, ProductData> = {
     ],
     extraSections: [
       {
-        title: "Government Subsidy Schemes We Assist With",
+        title: "Government Subsidy We Assist With",
         items: [
           "Start-Up Subsidies – Financial assistance for new businesses and entrepreneurs",
           "MSME Subsidy Schemes – Funding support for small and medium enterprises",

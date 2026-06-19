@@ -28,7 +28,7 @@ const LOAN_OPTIONS = [
   { value: "business-loan", label: "Business Loan" },
   { value: "project-loan", label: "Project Loan" },
   { value: "loan-against-property", label: "Loan Against Property" },
-  { value: "govt-subsidy", label: "Govt Subsidy Scheme" },
+  { value: "govt-subsidy", label: "Govt Subsidy" },
 ];
 
 const INDIAN_STATES = [

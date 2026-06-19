@@ -45,6 +45,10 @@ const LINK_SECTIONS = [
         label: "Loan Against Property",
         href: "/products/loan-against-property#product-hero",
       },
+      {
+        label: "Govt Subsidy",
+        href: "/products/govt-subsidy-scheme#product-hero",
+      },
     ],
   },
   {
@@ -107,11 +111,11 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-1/60 pt-16 relative overflow-hidden">
-      <div className="container flex max-lg:flex-col justify-center max-lg:items-center lg:justify-between gap-6 lg:gap-16 pb-16 text-center lg:text-left items-center lg:items-stretch">
-        <div className="w-fit max-lg:mx-auto flex lg:w-xs flex-col items-center lg:items-start justify-center">
+      <div className="container flex max-lg:flex-col gap-6 pb-16 text-center justify-between lg:text-left">
+        <div className="max-lg:mx-auto flex w-[310px] flex-col items-center lg:items-start justify-center">
           <a
             href="/#hero"
-            className="border w-full max-sm:w-50 max-lg:w-60 border-gray-2 bg-gray-1 p-3 rounded-md"
+            className="border w-full border-gray-2 bg-gray-1 p-3 rounded-md"
           >
             <img
               width={55}
@@ -122,14 +126,14 @@ export default function Footer() {
             />
           </a>
         </div>
-        <div className="flex flex-col lg:flex-row justify-center lg:w-sm lg:justify-start gap-12 lg:gap-16">
-          <div className="lg:col-span-4 space-y-8 flex flex-col items-center lg:items-start justify-center lg:justify-start w-full max-w-md mx-auto lg:mx-0">
+        <div className="flex flex-col lg:flex-row justify-center lg:justify-start max-lg:mx-auto w-[330px] gap-12 lg:gap-16">
+          <div className="lg:col-span-4 space-y-8 flex flex-col items-center w-full lg:items-start justify-center lg:justify-start mx-auto lg:mx-0">
             <div className="space-y-2 w-full flex flex-col items-center lg:items-start">
-              <p className="text-base text-muted mb-6">
+              <p className="text-base text-muted text-center mb-6">
                 We specialize in providing hassle-free loans for every need,
                 including personal loans, business loans, home loans and more.
               </p>
-              <h4 className="text-base font-bold text-foreground">
+              <h4 className="text-base font-bold text-center w-full text-foreground">
                 Subscribe For Newsletter
               </h4>
               {status === "success" ? (
@@ -191,7 +195,7 @@ export default function Footer() {
                 </div>
               )}
             </div>
-            <div className="flex flex-col items-center lg:flex-row gap-3 pt-2 w-full lg:w-auto">
+            <div className="flex flex-col items-center gap-3 pt-2 w-full">
               <div className="w-10 h-10 rounded-xl bg-brand-muted border border-brand/20 flex items-center justify-center text-brand shrink-0">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M6.62 10.79a15.15 15.15 0 006.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
@@ -211,7 +215,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="border border-gray-2 max-sm:w-full max-lg:w-2/3 gap-2 bg-gray-1 p-6 lg:w-sm rounded-md flex justify-between">
+        <div className="border border-gray-2 max-lg:mx-auto max-sm:w-[345px] w-[310px] gap-2 bg-gray-1 p-6 rounded-md flex justify-between">
           {LINK_SECTIONS.map((section, idx) => (
             <div
               key={idx}
