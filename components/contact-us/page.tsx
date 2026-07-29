@@ -4,13 +4,16 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Globe, Contact2 } from "lucide-react";
 import SectionHeader from "@/components/common/section-header";
 
+const mapEmbedSrc =
+  "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3509.898953788261!2d77.30854097549197!3d28.392119775796857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjjCsDIzJzMxLjYiTiA3N8KwMTgnNDAuMCJF!5e0!3m2!1sen!2sin!4v1785333680037!5m2!1sen!2sin";
+
 const contactDetails = [
   {
     icon: MapPin,
     label: "Address",
     value:
       "Ganga place, Ajronda Rd, Krishna Nagar, New Industrial Township, Sector 20B, Faridabad, Haryana 121001",
-    href: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3509.898953788261!2d77.30854097549197!3d28.392119775796857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjjCsDIzJzMxLjYiTiA3N8KwMTgnNDAuMCJF!5e0!3m2!1sen!2sin!4v1785333680037!5m2!1sen!2sin",
+    href: "https://www.google.com/maps/search/?api=1&query=Ganga+place%2C+Ajronda+Rd%2C+Krishna+Nagar%2C+New+Industrial+Township%2C+Sector+20B%2C+Faridabad%2C+Haryana+121001",
   },
   {
     icon: Mail,
@@ -22,15 +25,10 @@ const contactDetails = [
     icon: Phone,
     label: "Telephone",
     value: [
-      {
-        label: "+91 9355545155",
-        href: "tel:+919355545155",
-      },
-      {
-        label: "+91 9891115888",
-        href: "tel:+919891115888",
-      },
+      { label: "+91 9355545155", href: "tel:+919355545155" },
+      { label: "+91 9891115888", href: "tel:+919891115888" },
     ],
+    href: undefined,
   },
   {
     icon: Globe,
@@ -63,7 +61,7 @@ export default function ContactPage() {
             style={{ height: "420px" }}
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3509.898953788261!2d77.30854097549197!3d28.392119775796857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjjCsDIzJzMxLjYiTiA3N8KwMTgnNDAuMCJF!5e0!3m2!1sen!2sin!4v1785333680037!5m2!1sen!2sin"
+              src={mapEmbedSrc}
               width="100%"
               height="100%"
               style={{ border: 0, filter: "invert(90%) hue-rotate(180deg)" }}
@@ -74,48 +72,58 @@ export default function ContactPage() {
             />
           </motion.div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {contactDetails.map(({ icon: Icon, label, value, href }, i) => (
-              <motion.a
-                key={i}
-                href={href}
-                target={href?.startsWith("http") ? "_blank" : undefined}
-                rel={
-                  href?.startsWith("http") ? "noopener noreferrer" : undefined
-                }
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                whileHover={{ y: -4, borderColor: "rgba(163,220,47,0.3)" }}
-                className="flex flex-col gap-3 bg-gray-1/60 border border-gray-2 rounded-xl p-5 backdrop-blur-sm transition-all duration-300 cursor-pointer group"
-              >
-                <div className="w-10 h-10 rounded-lg bg-brand/10 border border-brand/20 flex items-center justify-center shrink-0">
-                  <Icon className="w-5 h-5 text-brand" />
-                </div>
-                <div>
-                  <p className="text-xs text-muted uppercase tracking-widest font-medium mb-1">
-                    {label}
-                  </p>
-                  {Array.isArray(value) ? (
-                    <div className="flex items-center gap-3">
-                      {value.map((phone) => (
-                        <a
-                          key={phone.href}
-                          href={phone.href}
-                          className="text-sm font-bold text-foreground hover:text-brand transition-colors"
-                        >
-                          {phone.label}
-                        </a>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-sm text-foreground font-medium leading-relaxed group-hover:text-brand transition-colors">
-                      {value}
+            {contactDetails.map(({ icon: Icon, label, value, href }, i) => {
+              const isMultiValue = Array.isArray(value);
+              const Wrapper = isMultiValue ? motion.div : motion.a;
+              const wrapperProps = isMultiValue
+                ? {}
+                : {
+                    href,
+                    target: href?.startsWith("http") ? "_blank" : undefined,
+                    rel: href?.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined,
+                  };
+
+              return (
+                <Wrapper
+                  key={i}
+                  {...wrapperProps}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  whileHover={{ y: -4, borderColor: "rgba(163,220,47,0.3)" }}
+                  className="flex flex-col gap-3 bg-gray-1/60 border border-gray-2 rounded-xl p-5 backdrop-blur-sm transition-all duration-300 cursor-pointer group"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-brand/10 border border-brand/20 flex items-center justify-center shrink-0">
+                    <Icon className="w-5 h-5 text-brand" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted uppercase tracking-widest font-medium mb-1">
+                      {label}
                     </p>
-                  )}
-                </div>
-              </motion.a>
-            ))}
+                    {isMultiValue ? (
+                      <div className="flex items-center gap-3">
+                        {value.map((phone) => (
+                          <a
+                            key={phone.href}
+                            href={phone.href}
+                            className="text-sm font-bold text-foreground hover:text-brand transition-colors"
+                          >
+                            {phone.label}
+                          </a>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-foreground font-medium leading-relaxed group-hover:text-brand transition-colors">
+                        {value}
+                      </p>
+                    )}
+                  </div>
+                </Wrapper>
+              );
+            })}
           </div>
         </div>
       </div>
