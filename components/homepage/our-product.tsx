@@ -27,6 +27,8 @@ export default function Services() {
           subtitle="We structure capital interfaces to accelerate corporate growth and secure personal assets with absolute clarity."
           alignment="left"
         />
+
+        {/* Desktop View: Grid dynamically renders ALL items */}
         <div className="hidden xl:block mb-0!">
           <motion.div
             variants={staggerContainer}
@@ -35,24 +37,7 @@ export default function Services() {
             viewport={{ once: true, margin: "-40px" }}
             className="grid grid-cols-4 gap-4"
           >
-            {servicesData.slice(0, 4).map((srv, idx) => (
-              <ServiceCard
-                key={idx}
-                srv={srv}
-                isSlider={false}
-                setIsModalOpen={setIsModalOpen}
-                isModalOpen={isModalOpen}
-              />
-            ))}
-          </motion.div>
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-40px" }}
-            className="grid grid-cols-4 gap-4 mt-4"
-          >
-            {servicesData.slice(4, 8).map((srv, idx) => (
+            {servicesData.map((srv, idx) => (
               <ServiceCard
                 key={idx}
                 srv={srv}
@@ -63,6 +48,8 @@ export default function Services() {
             ))}
           </motion.div>
         </div>
+
+        {/* Mobile & Tablet Swiper Slider View */}
         <div className="block xl:hidden w-full pb-none">
           <Swiper
             modules={[Autoplay, Pagination]}
@@ -166,14 +153,10 @@ function ServiceCard({
             alt={srv.title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <div className="absolute top-3 left-3 bg-background/70 backdrop-blur-md px-2.5 py-1 rounded-lg text-xs text-muted flex items-center gap-1.5 border border-gray-2/40">
-            <CardIcon className="w-3.5 h-3.5 text-brand" />
-            <span className="font-light">{srv.price}</span>
-          </div>
         </div>
       </a>
       <div className="space-y-1.5 flex-1 p-5">
-        <h3 className="text-base font-bold text-foreground line-clamp-1 group-hover:text-brand transition-colors">
+        <h3 className="text-base uppercase font-bold text-foreground line-clamp-1 group-hover:text-brand transition-colors">
           {srv.title}
         </h3>
         <p className="text-muted text-sm font-light line-clamp-2 leading-relaxed">

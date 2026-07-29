@@ -2,6 +2,7 @@
 import { useState } from "react";
 import PrivacyPolicyModal from "../popups/privacy";
 import TermsModal from "../popups/term-sheet";
+import Link from "next/link";
 
 const SOCIAL_LINKS = [
   {
@@ -41,6 +42,11 @@ const LINK_SECTIONS = [
       { label: "Personal Loan", href: "/products/personal-loan#product-hero" },
       { label: "Business Loan", href: "/products/business-loan#product-hero" },
       { label: "Project Loan", href: "/products/project-loan#product-hero" },
+    ],
+  },
+  {
+    title: "Solutions & Info",
+    links: [
       {
         label: "Loan Against Property",
         href: "/products/loan-against-property#product-hero",
@@ -49,15 +55,9 @@ const LINK_SECTIONS = [
         label: "Govt Subsidy",
         href: "/products/govt-subsidy-scheme#product-hero",
       },
-    ],
-  },
-  {
-    title: "Useful Links",
-    links: [
-      { label: "Home", href: "/#hero" },
-      { label: "About us", href: "/#about" },
-      { label: "Privacy Policy", href: "#privacy" },
-      { label: "Terms & Sheet", href: "#terms" },
+      { label: "NPA & OTS Funding", href: "/#products" },
+      { label: "Bridge Finance", href: "/#products" },
+      { label: "Stressed Asset Finance", href: "/#products" },
     ],
   },
 ];
@@ -111,22 +111,22 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-1/60 pt-16 relative overflow-hidden">
-      <div className="container flex max-lg:flex-col gap-6 pb-16 text-center justify-between lg:text-left">
-        <div className="max-lg:mx-auto flex w-[310px] flex-col items-center lg:items-start justify-center">
+      <div className="container flex max-lg:flex-col max-xl:flex-wrap max-xl:justify-center gap-6 pb-16 text-center justify-between lg:text-left">
+        <div className="max-lg:mx-auto flex w-[366px] sm:h-[366px] flex-col items-center lg:items-start justify-center">
           <a
             href="/#hero"
-            className="border w-full border-gray-2 bg-gray-1 p-3 rounded-md"
+            className="border h-full flex items-center w-full p-18 bg-white border-gray-2 rounded-md"
           >
             <img
               width={55}
               height={55}
-              src="/tl-logo.png"
+              src="/logo.svg"
               alt="logo"
-              className="object-cover select-none pointer-events-none w-full rounded-md"
+              className="object-cover select-none p-6 pointer-events-none w-full rounded-md"
             />
           </a>
         </div>
-        <div className="flex flex-col lg:flex-row justify-center lg:justify-start max-lg:mx-auto w-[330px] gap-12 lg:gap-16">
+        <div className="flex flex-col border border-gray-2 p-4 lg:flex-row justify-center lg:justify-start max-lg:mx-auto w-[366px] gap-12 lg:gap-16">
           <div className="lg:col-span-4 space-y-8 flex flex-col items-center w-full lg:items-start justify-center lg:justify-start mx-auto lg:mx-0">
             <div className="space-y-2 w-full flex flex-col items-center lg:items-start">
               <p className="text-base text-muted text-center mb-6">
@@ -202,60 +202,96 @@ export default function Footer() {
                 </svg>
               </div>
               <div className="space-y-0.5 text-center lg:text-left">
-                <span className="text-sm text-muted font-light block leading-none">
+                <span className="text-sm text-center text-muted font-light block leading-none">
                   Call to Our Experts
                 </span>
-                <a
-                  href="tel:+918595332014"
-                  className="text-sm font-bold text-foreground hover:text-brand transition-colors block"
-                >
-                  +91 8595 332 014
-                </a>
+                <div className="flex items-center gap-3">
+                  <a
+                    href="tel:+919355545155"
+                    className="text-sm font-bold text-foreground hover:text-brand transition-colors block"
+                  >
+                    +91 9355545155
+                  </a>
+                  <a
+                    href="tel:+919891115888"
+                    className="text-sm font-bold text-foreground hover:text-brand transition-colors block"
+                  >
+                    +91 9891115888
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="border border-gray-2 max-lg:mx-auto max-sm:w-[345px] w-[310px] gap-2 bg-gray-1 p-6 rounded-md flex justify-between">
-          {LINK_SECTIONS.map((section, idx) => (
-            <div
-              key={idx}
-              className="space-y-3 flex flex-col items-center lg:items-start w-full sm:w-auto"
-            >
-              <h4 className="text-base w-full text-center border-b border-brand font-bold text-foreground tracking-wide">
-                {section.title}
-              </h4>
-              <ul className="space-y-2 w-full text-sm font-light text-muted flex flex-col items-center lg:items-start">
-                {section.links.map((link, linkIdx) => (
-                  <li className="w-full" key={linkIdx}>
-                    {link.label === "Privacy Policy" ? (
-                      <button
-                        type="button"
-                        onClick={() => setIsPrivacyOpen(true)}
-                        className="hover:text-brand text-center! transition-colors block py-0.5 w-full cursor-pointer"
-                      >
-                        {link.label}
-                      </button>
-                    ) : link.label === "Terms & Sheet" ? (
-                      <button
-                        type="button"
-                        onClick={() => setIsTermsOpen(true)}
-                        className="hover:text-brand text-center! transition-colors block py-0.5 w-full cursor-pointer"
-                      >
-                        {link.label}
-                      </button>
-                    ) : (
-                      <a
-                        href={link.href}
-                        className="hover:text-brand text-center! transition-colors block py-0.5"
-                      >
-                        {link.label}
-                      </a>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <div className="border border-gray-2 max-lg:mx-auto w-[366px] sm:h-[366px] gap-2 bg-gray-1 p-6 rounded-md">
+          <h4
+            className={` text-base w-full text-center border-b border-brand font-bold text-foreground tracking-wide`}
+          >
+            Our Products
+          </h4>
+          <div className="flex justify-between gap-1 mt-4">
+            {LINK_SECTIONS.map((section, idx) => (
+              <div
+                key={idx}
+                className="space-y-3 flex flex-col items-center lg:items-start w-full sm:w-auto"
+              >
+                <ul className="space-y-3 mt-2 w-full uppercase text-sm font-light text-muted flex flex-col items-center lg:items-start">
+                  {section.links.map((link, linkIdx) => (
+                    <li className="w-full" key={linkIdx}>
+                      {link.label === "Privacy Policy" ? (
+                        <button
+                          type="button"
+                          onClick={() => setIsPrivacyOpen(true)}
+                          className="hover:text-brand text-center! transition-colors block w-full cursor-pointer"
+                        >
+                          {link.label}
+                        </button>
+                      ) : link.label === "Terms & Sheet" ? (
+                        <button
+                          type="button"
+                          onClick={() => setIsTermsOpen(true)}
+                          className="hover:text-brand text-center! transition-colors block w-full cursor-pointer"
+                        >
+                          {link.label}
+                        </button>
+                      ) : (
+                        <a
+                          href={link.href}
+                          className="hover:text-brand text-center! transition-colors block"
+                        >
+                          {link.label}
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className={`h-px bg-brand w-full mt-10`}></div>
+          <div className="flex justify-between mt-4">
+            <ul className="flex justify-between items-center w-full text-sm font-light text-muted">
+              <li>
+                <button
+                  type="button"
+                  onClick={() => setIsPrivacyOpen(true)}
+                  className="hover:text-brand transition-colors cursor-pointer"
+                >
+                  Privacy Policy
+                </button>
+              </li>
+
+              <li>
+                <button
+                  type="button"
+                  onClick={() => setIsTermsOpen(true)}
+                  className="hover:text-brand transition-colors cursor-pointer"
+                >
+                  Terms & Conditions
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div className="container">
@@ -291,8 +327,10 @@ export default function Footer() {
             </div>
 
             <p className="border border-gray-2 bg-gray-1 p-3 rounded-md">
-              <span className="font-bold underline">@Trustified Loan.</span> All
-              rights reserved.
+              <span className="font-bold underline">
+                @Seaone Synergy Pvt Ltd.
+              </span>{" "}
+              All rights reserved.
             </p>
           </div>
         </div>

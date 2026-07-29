@@ -26,7 +26,7 @@ export default function About() {
               badgeText="About Us"
               badgeIcon={User2}
               title="Fast, Reliable, and Hassle-Free Loans – Anytime, Anywhere!"
-              subtitle="Welcome to Trustified Loan, your trusted partner in financial solutions. We specialize in providing hassle-free loans for every need, including personal loans, business loans, home loans, project loans, and more."
+              subtitle="Welcome to Seaone Synergy, your trusted partner in financial solutions. We specialize in providing hassle-free loans for every need, including personal loans, business loans, home loans, project loans, and more."
               alignment="left"
             />
 
@@ -39,7 +39,7 @@ export default function About() {
               borrowing experience.
             </p>
             <p className="text-muted font-light leading-relaxed text-sm sm:text-base">
-              At Trustified Loan, we believe in making finance simple and
+              At Seaone Synergy Pvt Ltd. we believe in making finance simple and
               accessible. Whether you need funds for personal expenses, business
               growth, or a dream home, we are here to support your financial
               journey.

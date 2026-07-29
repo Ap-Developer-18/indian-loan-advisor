@@ -21,14 +21,17 @@ type ConsultationForm = z.infer<typeof consultationSchema>;
 type FormErrors = Partial<Record<keyof ConsultationForm, string>>;
 
 const LOAN_OPTIONS = [
-  { value: "cash-credit", label: "Cash Credit Limit" },
-  { value: "overdraft", label: "Over Draft Limit" },
-  { value: "home-loan", label: "Home Loan" },
-  { value: "personal-loan", label: "Personal Loan" },
-  { value: "business-loan", label: "Business Loan" },
-  { value: "project-loan", label: "Project Loan" },
-  { value: "loan-against-property", label: "Loan Against Property" },
-  { value: "govt-subsidy", label: "Govt Subsidy" },
+  { value: "cash-credit", label: "CASH CREDIT LIMIT" },
+  { value: "overdraft", label: "OVER DRAFT LIMIT" },
+  { value: "home-loan", label: "HOME LOAN" },
+  { value: "personal-loan", label: "PERSONAL LOAN" },
+  { value: "business-loan", label: "BUSINESS LOAN" },
+  { value: "project-loan", label: "PROJECT LOAN" },
+  { value: "loan-against-property", label: "LOAN AGAINST PROPERTY" },
+  { value: "govt-subsidy", label: "GOVT SUBSIDY" },
+  { value: "npa-ots-funding", label: "NPA & OTS FUNDING" },
+  { value: "bridge-finance", label: "BRIDGE FINANCE" },
+  { value: "stressed-asset-finance", label: "STRESSED ASSET FINANCE" },
 ];
 
 const INDIAN_STATES = [
@@ -122,19 +125,21 @@ function CustomDropdown({
   };
 
   return (
-    <div ref={wrapperRef} className="relative w-full">
+    <div ref={wrapperRef} className="relative w-full h-auto self-start">
       <button
         type="button"
         onClick={() => setOpen((p) => !p)}
-        className={`w-full flex items-center justify-between bg-background/50 border rounded-xl px-4 py-4 text-sm transition-colors focus:outline-none ${
+        className={`w-full flex items-center justify-between bg-white border rounded-xl px-4 py-3 text-sm transition-colors focus:outline-none ${
           error
             ? "border-red-500/60"
             : open
               ? "border-brand"
-              : "border-gray-2/40"
+              : "border-gray-300"
         }`}
       >
-        <span className={selected ? "text-white-100" : "text-muted/50"}>
+        <span
+          className={selected ? "text-slate-900 font-medium" : "text-slate-400"}
+        >
           {selected ? selected.label : placeholder}
         </span>
         <motion.svg
@@ -144,7 +149,7 @@ function CustomDropdown({
           height="16"
           viewBox="0 0 16 16"
           fill="none"
-          className="text-muted shrink-0"
+          className="text-slate-500 shrink-0 ml-2"
         >
           <path
             d="M4 6l4 4 4-4"
@@ -156,7 +161,7 @@ function CustomDropdown({
         </motion.svg>
       </button>
 
-      {error && <p className="mt-1.5 text-xs text-red-400">{error}</p>}
+      {error && <p className="mt-1.5 text-xs text-red-500">{error}</p>}
 
       <AnimatePresence>
         {open && (
@@ -165,23 +170,12 @@ function CustomDropdown({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 4 }}
             transition={{ duration: 0.15 }}
-            className="absolute left-0 right-0 mt-2 rounded-xl border border-gray-2/40 bg-black shadow-2xl z-50 overflow-hidden flex flex-col"
+            className="absolute left-0 right-0 mt-2 rounded-xl border border-gray-200 bg-white shadow-2xl z-50 overflow-hidden flex flex-col"
             onWheel={handleScrollThru}
             onTouchMove={handleScrollThru}
           >
-            <div className="p-2 border-b border-gray-2/20 bg-black">
-              <input
-                ref={inputRef}
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Type to search..."
-                className="w-full bg-background/40 border border-gray-2/30 rounded-lg px-3 py-2 text-xs text-white-100 placeholder:text-muted/40 focus:outline-none focus:border-brand/60"
-              />
-            </div>
-
             <div
-              className="max-h-45 overflow-y-auto overscroll-contain"
+              className="max-h-48 overflow-y-auto overscroll-contain touch-pan-y"
               style={{
                 scrollbarWidth: "thin",
                 WebkitOverflowScrolling: "touch",
@@ -198,18 +192,18 @@ function CustomDropdown({
                     }}
                     className={`w-full text-left px-4 py-3 text-sm transition-colors flex items-center justify-between ${
                       value === opt.value
-                        ? "text-brand bg-brand/10"
-                        : "text-muted hover:text-white-100 hover:bg-white/5"
+                        ? "text-brand bg-brand/5 font-semibold"
+                        : "text-slate-700 hover:text-slate-900 hover:bg-slate-50"
                     }`}
                   >
-                    {opt.label}
+                    <span>{opt.label}</span>
                     {value === opt.value && (
                       <svg
                         width="14"
                         height="14"
                         viewBox="0 0 14 14"
                         fill="none"
-                        className="text-brand shrink-0"
+                        className="text-brand shrink-0 ml-2"
                       >
                         <path
                           d="M2.5 7l3.5 3.5 5.5-6"
@@ -223,7 +217,7 @@ function CustomDropdown({
                   </button>
                 ))
               ) : (
-                <div className="px-4 py-3 text-xs text-muted/50 text-center">
+                <div className="px-4 py-3 text-xs text-slate-400 text-center">
                   No results found
                 </div>
               )}
@@ -313,136 +307,150 @@ export default function ConsultationModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 min-h-screen">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
         onClick={isSubmitting ? undefined : onClose}
-        className="absolute inset-0 bg-background/80 backdrop-blur-md"
+        className="absolute inset-0 bg-slate-900/40 backdrop-blur-md"
       />
 
+      {/* Safari-Safe Modal Container */}
       <motion.div
         initial={{ opacity: 0, scale: 0.92 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.92 }}
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-        className="relative w-full max-w-md overflow-visible rounded-xl border border-gray-1 bg-black p-6 shadow-2xl z-10"
+        className="relative w-full max-w-md max-h-[90vh] overflow-y-auto border border-gray-200 bg-white p-6 shadow-2xl z-10 rounded-xl flex flex-col my-auto shrink-0"
       >
-        <div className="mb-6 flex items-start justify-between gap-4">
+        <div className="mb-6 flex items-start justify-between gap-4 shrink-0">
           <div>
-            <h3 className="text-xl text-start font-bold text-white-100 tracking-tight">
+            <h3 className="text-xl text-start font-bold text-slate-900 tracking-tight">
               Book Free Consultation
             </h3>
-            <p className="text-muted text-start text-sm mt-1">
+            <p className="text-slate-500 text-start text-sm mt-1">
               Enter your details and our financial expert will call you back
               shortly.
             </p>
           </div>
           <div className="shrink-0">
             <Image
-              src="/logo.webp"
+              src="/logo.svg"
               alt="Logo"
               width={52}
               height={52}
-              className="size-13 rounded-full object-contain"
+              className="w-13 h-13 object-contain shrink-0"
             />
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4 text-left">
-          {/* Your Name */}
-          <div>
-            <label className="text-muted text-sm">Your Name</label>
-            <input
-              type="text"
-              disabled={isSubmitting}
-              value={form.fullName}
-              onChange={set("fullName")}
-              placeholder="e.g., Aman Kumar"
-              className={`w-full bg-background/50 mt-2 border rounded-xl px-4 py-4 text-sm text-white-100 placeholder:text-muted/50 focus:outline-none transition-colors disabled:opacity-50 ${
-                errors.fullName
-                  ? "border-red-500/60"
-                  : "border-gray-2/40 focus:border-brand"
-              }`}
-            />
-            {errors.fullName && (
-              <p className="mt-1.5 text-xs text-red-400">{errors.fullName}</p>
-            )}
-          </div>
-
-          {/* Your State */}
-          <div>
-            <label className="text-muted text-sm">Your State</label>
-            <div className="mt-2">
-              <CustomDropdown
-                value={form.state}
-                onChange={(val) => {
-                  setForm((p) => ({ ...p, state: val }));
-                  if (errors.state)
-                    setErrors((p) => ({ ...p, state: undefined }));
-                }}
-                error={errors.state}
-                options={INDIAN_STATES.map((s) => ({ value: s, label: s }))}
-                placeholder="Select your state"
-              />
-            </div>
-          </div>
-
-          {/* Product Type */}
-          <div>
-            <label className="text-muted text-sm">Product Type</label>
-            <div className="mt-2">
-              <CustomDropdown
-                value={form.loanType}
-                onChange={(val) => {
-                  setForm((p) => ({ ...p, loanType: val }));
-                  if (errors.loanType)
-                    setErrors((p) => ({ ...p, loanType: undefined }));
-                }}
-                error={errors.loanType}
-                options={LOAN_OPTIONS}
-                placeholder="Select product type"
-              />
-            </div>
-          </div>
-
-          {/* Phone Number */}
-          <div>
-            <label className="text-muted text-sm">Phone Number</label>
-            <div className="relative mt-2">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-muted font-medium">
-                +91
-              </span>
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 text-left flex-1 flex flex-col justify-between"
+        >
+          <div className="space-y-4">
+            {/* Your Name */}
+            <div>
+              <label className="text-slate-700 font-medium text-sm block">
+                Your Name
+              </label>
               <input
-                type="tel"
+                type="text"
                 disabled={isSubmitting}
-                value={form.phone}
-                onChange={set("phone")}
-                maxLength={10}
-                placeholder="Enter 10-digit mobile number"
-                className={`w-full bg-background/50 border rounded-xl pl-14 pr-4 py-4 text-sm text-white-100 placeholder:text-muted/50 focus:outline-none transition-colors disabled:opacity-50 ${
-                  errors.phone
+                value={form.fullName}
+                onChange={set("fullName")}
+                placeholder="e.g., Daksh Rawat"
+                className={`w-full bg-white mt-1.5 border rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none transition-colors disabled:opacity-50 ${
+                  errors.fullName
                     ? "border-red-500/60"
-                    : "border-gray-2/40 focus:border-brand"
+                    : "border-gray-300 focus:border-brand"
                 }`}
               />
+              {errors.fullName && (
+                <p className="mt-1.5 text-xs text-red-500">{errors.fullName}</p>
+              )}
             </div>
-            {errors.phone && (
-              <p className="mt-1.5 text-xs text-red-400">{errors.phone}</p>
-            )}
+
+            {/* Your State */}
+            <div>
+              <label className="text-slate-700 font-medium text-sm block">
+                Your State
+              </label>
+              <div className="mt-1.5">
+                <CustomDropdown
+                  value={form.state}
+                  onChange={(val) => {
+                    setForm((p) => ({ ...p, state: val }));
+                    if (errors.state)
+                      setErrors((p) => ({ ...p, state: undefined }));
+                  }}
+                  error={errors.state}
+                  options={INDIAN_STATES.map((s) => ({ value: s, label: s }))}
+                  placeholder="Select your state"
+                />
+              </div>
+            </div>
+
+            {/* Product Type */}
+            <div>
+              <label className="text-slate-700 font-medium text-sm block">
+                Product Type
+              </label>
+              <div className="mt-1.5">
+                <CustomDropdown
+                  value={form.loanType}
+                  onChange={(val) => {
+                    setForm((p) => ({ ...p, loanType: val }));
+                    if (errors.loanType)
+                      setErrors((p) => ({ ...p, loanType: undefined }));
+                  }}
+                  error={errors.loanType}
+                  options={LOAN_OPTIONS}
+                  placeholder="Select product type"
+                />
+              </div>
+            </div>
+
+            {/* Phone Number */}
+            <div>
+              <label className="text-slate-700 font-medium text-sm block">
+                Phone Number
+              </label>
+              <div className="relative mt-1.5">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-slate-500 font-medium pointer-events-none">
+                  +91
+                </span>
+                <input
+                  type="tel"
+                  disabled={isSubmitting}
+                  value={form.phone}
+                  onChange={set("phone")}
+                  maxLength={10}
+                  placeholder="Enter 10-digit mobile number"
+                  className={`w-full bg-white border rounded-xl pl-14 pr-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none transition-colors disabled:opacity-50 ${
+                    errors.phone
+                      ? "border-red-500/60"
+                      : "border-gray-300 focus:border-brand"
+                  }`}
+                />
+              </div>
+              {errors.phone && (
+                <p className="mt-1.5 text-xs text-red-500">{errors.phone}</p>
+              )}
+            </div>
           </div>
 
           {/* Actions */}
-          <div className="flex items-center justify-center gap-4 mt-6">
+          <div className="flex items-center justify-center gap-4 pt-4 mt-2 shrink-0">
             <Button
               roundedNormal
               onClick={onClose}
               name="cancel"
               variant="outline"
-              className="w-full!"
-              disabled={isSubmitting} // लोडिंग के समय कैंसिल बटन भी लॉक हो जायेगा
+              className="w-full! bg-transparent! text-black!"
+              disabled={isSubmitting}
             >
               Cancel
             </Button>
@@ -456,7 +464,6 @@ export default function ConsultationModal({
             >
               {isSubmitting ? (
                 <>
-                  {/* CSS SVG स्पिनर */}
                   <svg
                     className="animate-spin h-4 w-4 text-current"
                     fill="none"

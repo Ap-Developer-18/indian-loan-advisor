@@ -22,20 +22,21 @@ export default function Navbar() {
 
   return (
     <div className="sticky container top-4 z-50 w-full px-4">
-      <nav className="max-w-7xl mx-auto bg-background/75 backdrop-blur-md border rounded-xl border-gray-2/80 shadow-sm transition-all duration-300">
+      {/* Navbar background changed to bg-white and text adjusted for visibility */}
+      <nav className="max-w-7xl mx-auto bg-white border rounded-xl border-gray-2/80 shadow-sm transition-all duration-300">
         <div className="flex items-center justify-between h-20 px-4 sm:px-6">
           <a
             href="/#hero"
-            className="flex gap-2 items-center text-2xl lg:text-3xl font-extrabold text-white"
+            className="flex gap-2 items-center text-2xl lg:text-3xl font-extrabold text-slate-900"
           >
             <Image
-              className="rounded-full size-11 lg:size-13"
-              width={55}
-              height={55}
-              src={"/logo.webp"}
+              className="size-11"
+              width={30}
+              height={30}
+              src={"/logo.svg"}
               alt="logo"
             />
-            Trustified Loan
+            Seaone Synergy
           </a>
           <div className="hidden lg:flex items-center gap-6 text-sm lg:text-base font-medium text-muted">
             {navLinks.map((link, index) => (
@@ -46,7 +47,7 @@ export default function Navbar() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="hover:text-brand transition-colors"
+                    className="hover:text-brand transition-colors text-slate-700"
                   >
                     {link.label}
                   </a>
@@ -69,7 +70,7 @@ export default function Navbar() {
             aria-label="Toggle menu"
           >
             <svg
-              className="h-5 w-5"
+              className="h-5 w-5 stroke-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -96,14 +97,15 @@ export default function Navbar() {
 
       <AnimatePresence>
         {isOpen && (
+          /* Mobile Menubar background changed to bg-white */
           <motion.div
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.25 }}
-            className="lg:hidden absolute top-24 left-1/2 -translate-x-1/2 z-50 w-[calc(100vw-48px)] rounded-xl border border-gray-1 bg-background/95 backdrop-blur-md px-5 py-5 shadow-xl"
+            className="lg:hidden absolute top-24 left-1/2 -translate-x-1/2 z-50 w-[calc(100vw-48px)] rounded-xl border border-gray-1 bg-white px-5 py-5 shadow-xl"
           >
-            <div className="flex flex-col gap-4 text-muted font-medium">
+            <div className="flex flex-col gap-4 text-slate-700 font-medium">
               {navLinks.map((link) => (
                 <a
                   key={link.label}

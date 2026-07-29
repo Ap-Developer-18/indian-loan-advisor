@@ -1,11 +1,8 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Globe, Contact2 } from "lucide-react";
 import SectionHeader from "@/components/common/section-header";
-import Footer from "@/components/common/footer";
-import Navbar from "@/components/common/navbar";
 
 const contactDetails = [
   {
@@ -13,25 +10,33 @@ const contactDetails = [
     label: "Address",
     value:
       "Ganga place, Ajronda Rd, Krishna Nagar, New Industrial Township, Sector 20B, Faridabad, Haryana 121001",
-    href: "https://maps.google.com/?q=Ganga+place+Ajronda+Rd+Sector+20B+Faridabad+Haryana+121001",
+    href: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3509.898953788261!2d77.30854097549197!3d28.392119775796857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjjCsDIzJzMxLjYiTiA3N8KwMTgnNDAuMCJF!5e0!3m2!1sen!2sin!4v1785333680037!5m2!1sen!2sin",
   },
   {
     icon: Mail,
     label: "Mail Us",
-    value: "info@trustifiedloan.com",
-    href: "mailto:info@trustifiedloan.com",
+    value: "contact@seaonesynergy.com",
+    href: "mailto:contact@seaonesynergy.com",
   },
   {
     icon: Phone,
     label: "Telephone",
-    value: "+91 8595 332 014",
-    href: "tel:+918595332014",
+    value: [
+      {
+        label: "+91 9355545155",
+        href: "tel:+919355545155",
+      },
+      {
+        label: "+91 9891115888",
+        href: "tel:+919891115888",
+      },
+    ],
   },
   {
     icon: Globe,
     label: "Website",
-    value: "trustifiedloan.com",
-    href: "https://trustifiedloan.com",
+    value: "seaonesynergy.com",
+    href: "https://seaonesynergy.com",
   },
 ];
 
@@ -44,7 +49,7 @@ export default function ContactPage() {
           badgeIcon={Contact2}
           title="Contact Us"
           subtitle="If you have any query, please reach out to us. We specialize in providing hassle-free loans for every need."
-          alignment="center"
+          alignment="left"
         />
       </div>
       <div className="pb-24 mt-6 relative z-10">
@@ -58,25 +63,24 @@ export default function ContactPage() {
             style={{ height: "420px" }}
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3660.7138599547916!2d77.31113859999999!3d28.3921506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cdd42689799c5%3A0x61d560c21366abeb!2sILAFIN!5e1!3m2!1sen!2sin!4v1781143438946!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3509.898953788261!2d77.30854097549197!3d28.392119775796857!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjjCsDIzJzMxLjYiTiA3N8KwMTgnNDAuMCJF!5e0!3m2!1sen!2sin!4v1785333680037!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0, filter: "invert(90%) hue-rotate(180deg)" }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Trustified Loan Location"
+              title="Seaone Synergy Location"
             />
           </motion.div>
-
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {contactDetails.map(({ icon: Icon, label, value, href }, i) => (
               <motion.a
                 key={i}
                 href={href}
-                target={href.startsWith("http") ? "_blank" : undefined}
+                target={href?.startsWith("http") ? "_blank" : undefined}
                 rel={
-                  href.startsWith("http") ? "noopener noreferrer" : undefined
+                  href?.startsWith("http") ? "noopener noreferrer" : undefined
                 }
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -92,9 +96,23 @@ export default function ContactPage() {
                   <p className="text-xs text-muted uppercase tracking-widest font-medium mb-1">
                     {label}
                   </p>
-                  <p className="text-sm text-foreground font-medium leading-relaxed group-hover:text-brand transition-colors">
-                    {value}
-                  </p>
+                  {Array.isArray(value) ? (
+                    <div className="flex items-center gap-3">
+                      {value.map((phone) => (
+                        <a
+                          key={phone.href}
+                          href={phone.href}
+                          className="text-sm font-bold text-foreground hover:text-brand transition-colors"
+                        >
+                          {phone.label}
+                        </a>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-foreground font-medium leading-relaxed group-hover:text-brand transition-colors">
+                      {value}
+                    </p>
+                  )}
                 </div>
               </motion.a>
             ))}

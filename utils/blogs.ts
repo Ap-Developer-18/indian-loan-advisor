@@ -21,7 +21,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 Fixed vs Floating Interest Rates
 
-Floating interest rates are currently highly dynamic around volatile business cycles. Our senior advisers at Trustified Loan suggest opting for floating rates only if you expect surplus liquidity terms safely configured around your income structures. Fixed rates, on the other hand, work best for applicants who prefer predictable monthly outflows over the entire loan tenure.
+Floating interest rates are currently highly dynamic around volatile business cycles. Our senior advisers at Seaone Synergy suggest opting for floating rates only if you expect surplus liquidity terms safely configured around your income structures. Fixed rates, on the other hand, work best for applicants who prefer predictable monthly outflows over the entire loan tenure.
 
 Check for Hidden Operational Charges
 
@@ -47,7 +47,7 @@ Last 3 years of ITR with computation profiles, property chain documents valid ne
 
 Why Operational Speed Matters
 
-Traditional processing lines consume weeks, holding your operational velocity back. At Trustified Loan, our automated underwriting protocols map clean interest structures directly to applicant profiles, eliminating standard validation delays seamlessly.
+Traditional processing lines consume weeks, holding your operational velocity back. At Seaone Synergy, our automated underwriting protocols map clean interest structures directly to applicant profiles, eliminating standard validation delays seamlessly.
 
 Key Benefits of Our Ecosystem
 

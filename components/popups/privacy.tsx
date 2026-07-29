@@ -9,7 +9,7 @@ interface PrivacyPolicyModalProps {
 const SECTIONS = [
   {
     title: "Information We Collect",
-    body: "When you submit an enquiry, book a consultation, or apply for a loan product through Trustified Loan, we collect details such as your name, phone number, email address, state, and the loan type you're interested in. We may also collect technical information like your browser type and IP address to keep our website secure and functioning correctly.",
+    body: "When you submit an enquiry, book a consultation, or apply for a loan product through Seaone Synergy, we collect details such as your name, phone number, email address, state, and the loan type you're interested in. We may also collect technical information like your browser type and IP address to keep our website secure and functioning correctly.",
   },
   {
     title: "How We Use Your Information",
@@ -25,7 +25,7 @@ const SECTIONS = [
   },
   {
     title: "Your Choices",
-    body: "You can unsubscribe from our newsletter at any time, and you may request that we update or delete your personal information by writing to us at info@trustifiedloan.com.",
+    body: "You can unsubscribe from our newsletter at any time, and you may request that we update or delete your personal information by writing to us at contact@seaonesynergy.com.",
   },
   {
     title: "Cookies",
@@ -113,7 +113,7 @@ export default function PrivacyPolicyModal({
           onTouchMove={(e) => e.stopPropagation()}
         >
           <p className="text-sm text-muted leading-relaxed">
-            Trustified Loan respects your privacy. This policy explains what
+            Seaone Synergy respects your privacy. This policy explains what
             information we collect when you use our website or apply for loan
             consultation services, and how we use, store, and protect it.
           </p>
@@ -134,17 +134,17 @@ export default function PrivacyPolicyModal({
             <p className="text-sm text-muted leading-relaxed">
               Questions about this policy? Reach us at{" "}
               <a
-                href="mailto:info@trustifiedloan.com"
+                href="mailto:contact@seaonesynergy.com"
                 className="text-brand font-medium hover:underline"
               >
-                info@trustifiedloan.com
+                contact@seaonesynergy.com
               </a>{" "}
               or call{" "}
               <a
-                href="tel:+918595332014"
+                href="tel:+919355545155"
                 className="text-brand font-medium hover:underline"
               >
-                +91 8595 332 014
+                +91 9355545155
               </a>
               .
             </p>

@@ -7,13 +7,13 @@ export default function BlogListingPage() {
   return (
     <section id="blogs" className="container py-24 relative scroll-mt-6">
       <div className="absolute size-200 -left-100 inset-0 bg-radial-glow pointer-events-none z-0" />
-      <div className="relative z-10 space-y-6 lg:space-y-12">
+      <div className="relative z-10 space-y-6">
         <SectionHeader
           alignment="left"
           badgeText="Insights & Knowledge"
           badgeIcon={TrendingUp}
           title="Financial Advisory Corner"
-          subtitle="Read financial insights, tips, and loan strategies compiled by senior advisors at Trustified Loan, Faridabad."
+          subtitle="Read financial insights, tips, and loan strategies compiled by senior advisors at Seaone Synergy, Faridabad."
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {BLOG_POSTS.map((post) => (
@@ -28,12 +28,6 @@ export default function BlogListingPage() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute top-4 left-4">
-                  <span className="text-xs font-semibold px-3 py-1.5 rounded-xl bg-background border border-gray-2 text-brand flex items-center gap-1.5">
-                    <span className="size-2 rounded-full bg-brand" />
-                    {post.category}
-                  </span>
-                </div>
               </div>
 
               <div className="p-6 flex flex-col grow justify-between space-y-4">

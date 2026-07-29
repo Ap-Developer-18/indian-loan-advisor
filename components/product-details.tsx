@@ -5,8 +5,8 @@ import Badge from "@/components/common/badge";
 import Button from "@/components/common/button";
 import ConsultationModal from "@/components/popups/consultation";
 import { ProductData } from "@/app/products/[id]/page";
-// 1. productsData ko import karein taaki dusre products mil sakein
 import { productsData } from "@/utils/products";
+import Link from "next/link";
 
 const ProductDetails = ({
   product,
@@ -17,15 +17,12 @@ const ProductDetails = ({
   setIsModalOpen: any;
   isModalOpen: boolean;
 }) => {
-  // 2. Current product ko chhodkar baki saare products nikalne ka logic
-  // Kyuki productsData ek object hai (e.g., { 'slug-1': {...}, 'slug-2': {...} }), hum Object.entries use karenge
   const otherProducts = Object.entries(productsData)
-    .filter(([id]) => id !== product.slug) // Current product ko filter kiya
-    .map(([id, data]) => ({ id, ...data })); // Id aur data ko combine kiya
+    .filter(([id]) => id !== product.slug)
+    .map(([id, data]) => ({ id, ...data }));
 
   return (
     <>
-      {/* --- HERO SECTION --- */}
       <section className="relative min-h-[calc(100vh-106px)] overflow-hidden flex gap-16 pt-24 flex-col items-center justify-center text-center">
         <div className="absolute -top-30 lg:top-0 left-1/2 -translate-x-1/2 size-225 bg-radial-glow pointer-events-none z-0 opacity-75" />
         <motion.div
@@ -71,20 +68,20 @@ const ProductDetails = ({
             }}
             className="flex items-center justify-center gap-2 sm:gap-4 w-full"
           >
-            <a href="tel:+918595332014">
+            <Link href="tel:+919355545155">
               <Button variant="outline">
                 <Phone className="w-4 h-4 mr-2" />
                 Call an Expert
               </Button>
-            </a>
+            </Link>
           </motion.div>
         </motion.div>
         <div className="container">
-          <div className="relative z-10 w-full h-90 sm:h-120 md:h-130 lg:h-150 rounded-xl overflow-hidden shadow-2xl border border-gray-2/20 bg-gray-2 backdrop-blur-sm">
+          <div className="relative z-10 bg-white w-full aspect-4/3 lg:aspect-4/2 rounded-xl overflow-hidden shadow-2xl border border-gray-2/20 backdrop-blur-sm">
             <img
               src={product.img}
               alt={product.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
         </div>
@@ -159,7 +156,7 @@ const ProductDetails = ({
                     {OtherIcon && <OtherIcon className="w-5 h-5" />}
                   </div>
                   <div className="text-left">
-                    <h4 className="font-bold text-foreground group-hover:text-brand transition-colors text-sm sm:text-base line-clamp-1">
+                    <h4 className="font-bold uppercase text-foreground group-hover:text-brand transition-colors text-sm sm:text-base line-clamp-1">
                       {otherProd.title}
                     </h4>
                     <p className="text-xs text-muted font-light mt-0.5">
