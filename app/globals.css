@@ -25,7 +25,7 @@
   --color-background: var(--primary-dark);
   --color-foreground: var(--hex-fbfbfb);
   --color-brand: var(--primary-brand);
-  --color-brand-muted: rgba(163, 220, 47, 0.1);
+  --color-brand-muted: #0084FF05;
   --color-accent-mint: var(--accent-mint);
   --color-accent-yellow: var(--accent-yellow);
   --color-accent-blue: var(--accent-blue);
