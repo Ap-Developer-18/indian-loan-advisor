@@ -62,7 +62,7 @@ export default function About() {
               className="absolute inset-0 bg-brand/40 blur-xl"
             />
             <img
-              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80"
+              src="/about-us.webp"
               alt="Bespoke Consultation"
               className="relative z-10 w-full h-full object-cover rounded-xl"
             />

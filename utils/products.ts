@@ -21,7 +21,7 @@ export const servicesData = [
     icon: CreditCard,
     price: "Low Premium",
     counter: "+800 Active",
-    img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1200&auto=format&fit=crop",
+    img: "/cash-credit-limit.webp",
   },
   {
     slug: "overdraft-limit",
@@ -30,7 +30,7 @@ export const servicesData = [
     icon: Briefcase,
     price: "Flexible Cap",
     counter: "+420 Active",
-    img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop",
+    img: "/over-draft-limit.webp",
   },
   {
     slug: "home-loan",
@@ -39,7 +39,7 @@ export const servicesData = [
     icon: Home,
     price: "Prime Rates",
     counter: "+840 Profiles",
-    img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1200&auto=format&fit=crop",
+    img: "/home-loan.webp",
   },
   {
     slug: "personal-loan",
@@ -48,7 +48,7 @@ export const servicesData = [
     icon: User,
     price: "Instant Disp",
     counter: "+3.1k Users",
-    img: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop",
+    img: "/persoanl-loan.webp",
   },
   {
     slug: "business-loan",
@@ -57,7 +57,7 @@ export const servicesData = [
     icon: Layers,
     price: "Custom Cap",
     counter: "+410 Agencies",
-    img: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop",
+    img: "/business-loan.webp",
   },
   {
     slug: "project-loan",
@@ -66,7 +66,7 @@ export const servicesData = [
     icon: HardHat,
     price: "Project Plan",
     counter: "+150 Projects",
-    img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop",
+    img: "/project-loan.webp",
   },
   {
     slug: "loan-against-property",
@@ -75,7 +75,7 @@ export const servicesData = [
     icon: Building,
     price: "Asset Value",
     counter: "+680 Assets",
-    img: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=1200&auto=format&fit=crop",
+    img: "/loan-against-property.webp",
   },
   {
     slug: "govt-subsidy-scheme",
@@ -93,7 +93,7 @@ export const servicesData = [
     icon: AlertTriangle,
     price: "Stressed Capital",
     counter: "+250 Accounts",
-    img: "https://images.unsplash.com/photo-1599050751795-6cdaafbc2319?q=80&w=1200&auto=format&fit=crop",
+    img: "/npa-ots-funding.webp",
   },
   {
     slug: "bridge-finance",
