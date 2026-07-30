@@ -151,7 +151,7 @@ function ServiceCard({
           <img
             src={srv.img}
             alt={srv.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-101"
           />
         </div>
       </a>
