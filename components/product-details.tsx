@@ -148,7 +148,10 @@ const ProductDetails = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.05 }}
-                whileHover={{ y: -4, borderColor: "rgba(163,220,47,0.4)" }}
+                whileHover={{
+                  y: -4,
+                  borderColor: "#87cefa",
+                }}
                 className="flex items-center justify-between p-4 sm:p-5 bg-background/40 border border-gray-2/50 rounded-xl group transition-all duration-300 hover:bg-background/80 cursor-pointer backdrop-blur-sm"
               >
                 <div className="flex items-center gap-4">

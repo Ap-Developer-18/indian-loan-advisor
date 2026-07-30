@@ -66,7 +66,7 @@ export default function Navbar() {
           </div>
           <button
             onClick={() => setIsOpen((prev) => !prev)}
-            className="lg:hidden text-muted hover:text-brand p-2 border bg-gray-2 border-gray-1 rounded-lg transition-colors"
+            className="lg:hidden text-muted hover:text-brand p-2 border bg-[#0190E8]! rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
             <svg
@@ -122,7 +122,7 @@ export default function Navbar() {
                   setIsModalOpen(true);
                 }}
                 variant="primary"
-                className="w-full mt-2 flex items-center justify-center gap-1.5"
+                className="w-full mt-2 bg-[#0190E8]! flex items-center justify-center gap-1.5"
               >
                 Quick Apply
               </Button>
