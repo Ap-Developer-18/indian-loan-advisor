@@ -3,7 +3,7 @@
 :root {
   --primary-dark: #101010;
   --primary-brand: #87cefa;
-  --accent-mint: #00D1A0;
+  --accent-mint: #87cefa30;
   --accent-yellow: #FFC700;
   --accent-blue: #0084FF;
   --accent-indigo: #6366F1;
@@ -43,7 +43,9 @@
   --color-white-100: var(--white-100);
   --color-white-off: var(--hex-f5f5f5);
   --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
-  --background-image-radial-glow: radial-gradient(circle at center, rgba(163, 220, 47, 0.13) 0%, transparent 70%);
+  --background-image-radial-glow: radial-gradient(circle at center,
+      rgb(135 206 250 / 18%) 0%,
+      transparent 70%);
 }
 
 body {
