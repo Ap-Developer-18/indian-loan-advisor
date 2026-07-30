@@ -26,7 +26,7 @@ export const servicesData = [
   {
     slug: "overdraft-limit",
     title: "Over Draft Limit",
-    desc: "Short-term credit facility allowing withdrawals beyond available account balance.",
+    desc: "Short-term facility allowing withdrawals beyond available balance.",
     icon: Briefcase,
     price: "Flexible Cap",
     counter: "+420 Active",
@@ -35,7 +35,7 @@ export const servicesData = [
   {
     slug: "home-loan",
     title: "Home Loan",
-    desc: "Long-term financing facility for purchasing, constructing, or renovating homes.",
+    desc: "Financing facility for purchasing, constructing, or renovating homes.",
     icon: Home,
     price: "Prime Rates",
     counter: "+840 Profiles",
@@ -53,7 +53,7 @@ export const servicesData = [
   {
     slug: "business-loan",
     title: "Business Loan",
-    desc: "Flexible funding solution to meet business operational and expansion needs.",
+    desc: "Flexible funding to meet business operational and expansion needs.",
     icon: Layers,
     price: "Custom Cap",
     counter: "+410 Agencies",
@@ -62,7 +62,7 @@ export const servicesData = [
   {
     slug: "project-loan",
     title: "Project Loan",
-    desc: "Funding facility for financing new projects, infrastructure, or business expansion.",
+    desc: "Funding for financing new projects, infrastructure, or business expansion.",
     icon: HardHat,
     price: "Project Plan",
     counter: "+150 Projects",
@@ -80,7 +80,7 @@ export const servicesData = [
   {
     slug: "govt-subsidy-scheme",
     title: "Govt Subsidy",
-    desc: "Financial assistance from government schemes to support eligible businesses.",
+    desc: "Assistance from government schemes to support eligible businesses.",
     icon: Landmark,
     price: "Govt Verified",
     counter: "+920 Grants",
@@ -89,7 +89,7 @@ export const servicesData = [
   {
     slug: "npa-ots-funding",
     title: "NPA & OTS Funding",
-    desc: "Solutions for stressed & OTS accounts.",
+    desc: "Strategic funding enabling NPA resolution, OTS settlements, efficiently.",
     icon: AlertTriangle,
     price: "Stressed Capital",
     counter: "+250 Accounts",
@@ -98,7 +98,7 @@ export const servicesData = [
   {
     slug: "bridge-finance",
     title: "Bridge Finance",
-    desc: "Short-term funding for immediate needs.",
+    desc: "Fast short-term funding bridging financial gaps until permanent financing.",
     icon: GitCommit,
     price: "Short-Term",
     counter: "+310 Deals",
@@ -107,7 +107,7 @@ export const servicesData = [
   {
     slug: "stressed-asset-finance",
     title: "Stressed Asset Finance",
-    desc: "Resolution & financing for distressed assets.",
+    desc: "Reviving stressed assets through strategic funding, restoring growth.",
     icon: Scale,
     price: "Turnaround",
     counter: "+180 Recoveries",
