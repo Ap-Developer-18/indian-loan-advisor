@@ -80,7 +80,7 @@ export default function WhyUs() {
           <img
             src="/why-us.webp"
             alt="Expert Consultation Experience"
-            className="w-full object-cover h-full filter brightness-90"
+            className="w-full object-cover object-left h-full filter brightness-90"
           />
         </motion.div>
       </div>
