@@ -77,11 +77,11 @@ const ProductDetails = ({
           </motion.div>
         </motion.div>
         <div className="container">
-          <div className="relative z-10 bg-white w-full aspect-4/3 lg:aspect-4/2 rounded-xl overflow-hidden shadow-2xl border border-gray-2/20 backdrop-blur-sm">
+          <div className="relative z-10 bg-white w-full aspect-4/3 rounded-xl overflow-hidden shadow-2xl border border-gray-2/20 backdrop-blur-sm">
             <img
               src={product.img}
               alt={product.title}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-cover object-top"
             />
           </div>
         </div>
