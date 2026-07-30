@@ -47,7 +47,7 @@ export default function Navbar() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="hover:text-brand transition-colors text-slate-700"
+                    className="hover:text-[#0190E8]! transition-colors text-slate-700"
                   >
                     {link.label}
                   </a>
@@ -59,7 +59,7 @@ export default function Navbar() {
             <Button
               onClick={() => setIsModalOpen(true)}
               variant="primary"
-              className="w-full flex items-center justify-center gap-1.5"
+              className="w-full bg-[#0190E8]! flex items-center justify-center gap-1.5"
             >
               Quick Apply
             </Button>
