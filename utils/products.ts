@@ -98,7 +98,7 @@ export const servicesData = [
   {
     slug: "bridge-finance",
     title: "Bridge Finance",
-    desc: "Fast short-term funding bridging financial gaps until permanent financing.",
+    desc: "Fast funding bridging financial gaps until permanent financing.",
     icon: GitCommit,
     price: "Short-Term",
     counter: "+310 Deals",
