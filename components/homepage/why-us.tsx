@@ -78,7 +78,7 @@ export default function WhyUs() {
           className="col-span-6 xl:col-span-5 h-90 sm:h-120 lg:h-full lg:border-r-4 lg:border-t-4 lg:border-brand lg:rounded-tl-[150px] max-lg:rounded-xl lg:rounded-br-[150px] relative w-full overflow-hidden"
         >
           <img
-            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=30"
+            src="/why-us.webp"
             alt="Expert Consultation Experience"
             className="w-full object-cover h-full filter brightness-90"
           />
