@@ -34,6 +34,26 @@ const LOAN_OPTIONS = [
   { value: "stressed-asset-finance", label: "STRESSED ASSET FINANCE" },
 ];
 
+// Helper: Matches exact value, slug variations (e.g., 'overdraft-limit' -> 'overdraft'), or label
+function normalizeLoanType(incoming?: string): string {
+  if (!incoming) return "";
+  const cleaned = incoming.toLowerCase().trim().replace(/[-_]/g, "");
+
+  const matched = LOAN_OPTIONS.find((opt) => {
+    const optVal = opt.value.toLowerCase().replace(/[-_]/g, "");
+    const optLabel = opt.label.toLowerCase().replace(/[-_\s]/g, "");
+    return (
+      opt.value === incoming ||
+      optVal === cleaned ||
+      optLabel === cleaned ||
+      cleaned.includes(optVal) ||
+      optVal.includes(cleaned)
+    );
+  });
+
+  return matched ? matched.value : incoming;
+}
+
 const INDIAN_STATES = [
   "Andeman Nikobar Islands",
   "Andhra Pradesh",
@@ -232,17 +252,19 @@ function CustomDropdown({
 interface ConsultationModalProps {
   isOpen: boolean;
   onClose: () => void;
+  defaultLoanType?: string;
 }
 
 export default function ConsultationModal({
   isOpen,
   onClose,
+  defaultLoanType = "",
 }: ConsultationModalProps) {
   const [form, setForm] = useState<ConsultationForm>({
     fullName: "",
     state: "",
     phone: "",
-    loanType: "",
+    loanType: normalizeLoanType(defaultLoanType),
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -255,12 +277,17 @@ export default function ConsultationModal({
   }, [isOpen]);
 
   useEffect(() => {
-    if (!isOpen) {
+    if (isOpen) {
+      setForm((p) => ({
+        ...p,
+        loanType: normalizeLoanType(defaultLoanType) || p.loanType,
+      }));
+    } else {
       setForm({ fullName: "", state: "", phone: "", loanType: "" });
       setErrors({});
       setIsSubmitting(false);
     }
-  }, [isOpen]);
+  }, [isOpen, defaultLoanType]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -317,7 +344,6 @@ export default function ConsultationModal({
         className="absolute inset-0 bg-slate-900/40 backdrop-blur-md"
       />
 
-      {/* Safari-Safe Modal Container */}
       <motion.div
         initial={{ opacity: 0, scale: 0.92 }}
         animate={{ opacity: 1, scale: 1 }}

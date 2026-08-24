@@ -12,8 +12,8 @@ const contactDetails = [
     icon: MapPin,
     label: "Address",
     value:
-      "Ganga place, Ajronda Rd, Krishna Nagar, New Industrial Township, Sector 20B, Faridabad, Haryana 121001",
-    href: "https://www.google.com/maps/search/?api=1&query=Ganga+place%2C+Ajronda+Rd%2C+Krishna+Nagar%2C+New+Industrial+Township%2C+Sector+20B%2C+Faridabad%2C+Haryana+121001",
+      "Seaone, 2nd Floor, Ganga Palace, Krishna Nagar, Sector 20B, Faridabad, Haryana - 121001",
+    href: "#",
   },
   {
     icon: Mail,
@@ -25,7 +25,7 @@ const contactDetails = [
     icon: Phone,
     label: "Telephone",
     value: [
-      { label: "+91 9355545155", href: "tel:+919355545155" },
+      { label: "+91 9990533555", href: "tel:+919990533555" },
       { label: "+91 9891115888", href: "tel:+919891115888" },
     ],
     href: undefined,

@@ -4,45 +4,48 @@ import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Search,
-  Copy,
-  Check,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Loader2,
-  MailQuestion,
+  Inbox,
 } from "lucide-react";
 
-interface Subscriber {
+interface Consultation {
   _id: string;
-  email: string;
-  subscribedAt: string;
+  fullName: string;
+  state: string;
+  phone: string;
+  loanType: string;
+  createdAt: string;
 }
 
 const LIMIT = 10;
 
-function NewsletterContent() {
+function QueriesContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const page = parseInt(searchParams.get("page") || "1", 10);
   const search = searchParams.get("search") || "";
+  const loanFilter = searchParams.get("loanType") || "all";
 
   const [result, setResult] = useState<{
-    data: Subscriber[];
+    data: Consultation[];
     total: number;
     totalPages: number;
-  }>({ data: [], total: 0, totalPages: 0 });
+    loanTypes: string[];
+  }>({ data: [], total: 0, totalPages: 0, loanTypes: [] });
 
   const [loading, setLoading] = useState(true);
-  const [copiedEmail, setCopiedEmail] = useState("");
 
   const updateQuery = (updates: Record<string, string | number | null>) => {
     const params = new URLSearchParams(searchParams.toString());
     Object.entries(updates).forEach(([key, val]) => {
-      if (val === null || val === "") params.delete(key);
+      if (val === null || val === "" || val === "all") params.delete(key);
       else params.set(key, String(val));
     });
-    router.replace(`/admin/newsletter?${params.toString()}`);
+    router.replace(`/admin/queries?${params.toString()}`);
   };
 
   useEffect(() => {
@@ -53,9 +56,10 @@ function NewsletterContent() {
       page: String(page),
       limit: String(LIMIT),
       ...(search && { search }),
+      ...(loanFilter !== "all" && { loanType: loanFilter }),
     });
 
-    fetch(`/api/newsletter?${params.toString()}`)
+    fetch(`/api/consultation?${params.toString()}`)
       .then((res) => res.json())
       .then((json) => {
         if (!ignore && json.success) {
@@ -63,6 +67,7 @@ function NewsletterContent() {
             data: json.data,
             total: json.total,
             totalPages: json.totalPages,
+            loanTypes: json.loanTypes,
           });
         }
       })
@@ -74,37 +79,52 @@ function NewsletterContent() {
     return () => {
       ignore = true;
     };
-  }, [page, search]);
-
-  const handleCopy = (email: string) => {
-    navigator.clipboard.writeText(email);
-    setCopiedEmail(email);
-    setTimeout(() => setCopiedEmail(""), 1500);
-  };
+  }, [page, search, loanFilter]);
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
-          Newsletter Subscribers
+          Customer Enquiries
         </h1>
         <p className="mt-1 text-xs sm:text-sm text-muted">
-          Server-controlled email distribution lists.
+          Server-paginated consultation requests directly synced with Sanity.
         </p>
       </div>
 
-      <div className="max-w-md relative">
-        <Search
-          size={18}
-          className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted"
-        />
-        <input
-          type="text"
-          placeholder="Search by email..."
-          defaultValue={search}
-          onChange={(e) => updateQuery({ search: e.target.value, page: 1 })}
-          className="h-11 w-full rounded-xl bg-gray-1 border border-gray-2 pl-10 pr-4 text-sm text-white outline-none focus:border-brand"
-        />
+      <div className="flex flex-col sm:flex-row gap-3">
+        <div className="relative flex-1">
+          <Search
+            size={18}
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted"
+          />
+          <input
+            type="text"
+            placeholder="Search by name or phone..."
+            defaultValue={search}
+            onChange={(e) => updateQuery({ search: e.target.value, page: 1 })}
+            className="h-11 w-full rounded-xl bg-gray-1 border border-gray-2 pl-10 pr-4 text-sm text-white outline-none focus:border-brand"
+          />
+        </div>
+
+        <div className="relative sm:w-60">
+          <select
+            value={loanFilter}
+            onChange={(e) => updateQuery({ loanType: e.target.value, page: 1 })}
+            className="h-11 w-full appearance-none rounded-xl bg-gray-1 border border-gray-2 px-4 pr-10 text-sm text-white outline-none focus:border-brand cursor-pointer"
+          >
+            <option value="all">All Loan Types</option>
+            {result.loanTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+          <ChevronDown
+            size={16}
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-muted pointer-events-none"
+          />
+        </div>
       </div>
 
       <div className="rounded-2xl border border-gray-2 bg-gray-1 overflow-hidden">
@@ -113,20 +133,29 @@ function NewsletterContent() {
             <thead className="bg-[#171717] text-left text-muted border-b border-gray-2">
               <tr>
                 <th className="px-4 py-3 sm:px-6 sm:py-3.5 font-medium whitespace-nowrap">
-                  Email
+                  Name
                 </th>
                 <th className="px-4 py-3 sm:px-6 sm:py-3.5 font-medium whitespace-nowrap">
-                  Subscribed On
+                  State
+                </th>
+                <th className="px-4 py-3 sm:px-6 sm:py-3.5 font-medium whitespace-nowrap">
+                  Phone
+                </th>
+                <th className="px-4 py-3 sm:px-6 sm:py-3.5 font-medium whitespace-nowrap">
+                  Loan Type
+                </th>
+                <th className="px-4 py-3 sm:px-6 sm:py-3.5 font-medium whitespace-nowrap">
+                  Date
                 </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-2">
               {loading ? (
                 <tr>
-                  <td colSpan={2} className="py-16 text-center text-muted">
+                  <td colSpan={5} className="py-16 text-center text-muted">
                     <div className="flex flex-col items-center gap-2">
                       <Loader2 size={24} className="animate-spin text-brand" />
-                      <span>Loading subscriber entries...</span>
+                      <span>Fetching enquiries...</span>
                     </div>
                   </td>
                 </tr>
@@ -137,32 +166,30 @@ function NewsletterContent() {
                     className="hover:bg-[#1a1a1a] transition-colors"
                   >
                     <td className="px-4 py-3 sm:px-6 sm:py-4 font-medium text-white whitespace-nowrap">
-                      <div className="flex items-center gap-2">
-                        <span>{item.email}</span>
-                        <button
-                          onClick={() => handleCopy(item.email)}
-                          className="p-1 text-muted hover:text-white rounded hover:bg-gray-2 transition-colors"
-                          title="Copy email"
-                        >
-                          {copiedEmail === item.email ? (
-                            <Check size={14} className="text-emerald-400" />
-                          ) : (
-                            <Copy size={14} />
-                          )}
-                        </button>
-                      </div>
+                      {item.fullName}
                     </td>
                     <td className="px-4 py-3 sm:px-6 sm:py-4 text-muted whitespace-nowrap">
-                      {new Date(item.subscribedAt).toLocaleDateString()}
+                      {item.state || "—"}
+                    </td>
+                    <td className="px-4 py-3 sm:px-6 sm:py-4 text-muted whitespace-nowrap">
+                      {item.phone}
+                    </td>
+                    <td className="px-4 py-3 sm:px-6 sm:py-4 whitespace-nowrap">
+                      <span className="px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-brand/10 text-brand">
+                        {item.loanType}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 sm:px-6 sm:py-4 text-muted whitespace-nowrap">
+                      {new Date(item.createdAt).toLocaleDateString()}
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan={2} className="py-16 text-center text-muted">
+                  <td colSpan={5} className="py-16 text-center text-muted">
                     <div className="flex flex-col items-center gap-2">
-                      <MailQuestion size={28} className="text-muted" />
-                      <span>No subscribers found.</span>
+                      <Inbox size={28} className="text-muted" />
+                      <span>No enquiries match this criteria.</span>
                     </div>
                   </td>
                 </tr>
@@ -207,7 +234,7 @@ function NewsletterContent() {
   );
 }
 
-export default function AdminNewsletterPage() {
+export default function AdminQueriesPage() {
   return (
     <Suspense
       fallback={
@@ -217,7 +244,7 @@ export default function AdminNewsletterPage() {
         </div>
       }
     >
-      <NewsletterContent />
+      <QueriesContent />
     </Suspense>
   );
 }

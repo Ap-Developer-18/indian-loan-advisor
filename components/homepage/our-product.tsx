@@ -14,6 +14,13 @@ import { useState } from "react";
 
 export default function Services() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedLoanType, setSelectedLoanType] = useState("");
+
+  const handleQuickApply = (slug: string) => {
+    setSelectedLoanType(slug);
+    setIsModalOpen(true);
+  };
+
   return (
     <section id="products" className="scroll-mt-30 pb-30 relative">
       <div className="absolute -left-48 top-1/3 size-125 bg-brand/4 pointer-events-none blur-3xl" />
@@ -28,7 +35,7 @@ export default function Services() {
           alignment="left"
         />
 
-        {/* Desktop View: Grid dynamically renders ALL items */}
+        {/* Desktop View */}
         <div className="hidden xl:block mb-0!">
           <motion.div
             variants={staggerContainer}
@@ -42,14 +49,13 @@ export default function Services() {
                 key={idx}
                 srv={srv}
                 isSlider={false}
-                setIsModalOpen={setIsModalOpen}
-                isModalOpen={isModalOpen}
+                onQuickApply={() => handleQuickApply(srv.slug || srv.title)}
               />
             ))}
           </motion.div>
         </div>
 
-        {/* Mobile & Tablet Swiper Slider View */}
+        {/* Mobile & Tablet Slider */}
         <div className="block xl:hidden w-full pb-none">
           <Swiper
             modules={[Autoplay, Pagination]}
@@ -77,10 +83,9 @@ export default function Services() {
             {servicesData.map((srv, idx) => (
               <SwiperSlide key={idx} className="h-full py-2">
                 <ServiceCard
-                  setIsModalOpen={setIsModalOpen}
-                  isModalOpen={isModalOpen}
                   srv={srv}
                   isSlider={true}
+                  onQuickApply={() => handleQuickApply(srv.slug || srv.title)}
                 />
               </SwiperSlide>
             ))}
@@ -109,14 +114,20 @@ export default function Services() {
         }
         .srv-custom-bullet-active {
           width: 20px;
-          background-color: var(--color-brand, #a3dc2f) !important;
+          background-color: var(--color-brand, #87cefa) !important;
         }
       `}</style>
+
       <AnimatePresence>
         {isModalOpen && (
           <ConsultationModal
+            key={selectedLoanType || "modal"}
             isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
+            defaultLoanType={selectedLoanType}
+            onClose={() => {
+              setIsModalOpen(false);
+              setSelectedLoanType("");
+            }}
           />
         )}
       </AnimatePresence>
@@ -127,20 +138,16 @@ export default function Services() {
 function ServiceCard({
   srv,
   isSlider,
-  setIsModalOpen,
-  isModalOpen,
+  onQuickApply,
 }: {
   srv: any;
   isSlider: boolean;
-  setIsModalOpen?: any;
-  isModalOpen?: any;
+  onQuickApply: () => void;
 }) {
-  const CardIcon = srv.icon;
-
   return (
     <motion.div
       variants={isSlider ? undefined : scaleUp}
-      whileHover={{ y: -4, borderColor: "rgba(163,220,47,0.3)" }}
+      whileHover={{ y: -4, borderColor: "rgba(135,206,250,0.3)" }}
       className="bg-black/1 border border-gray-2 rounded-xl overflow-hidden flex flex-col justify-between space-y-1 backdrop-blur-md shadow-lg relative group transition-all duration-300 h-full"
     >
       <a
@@ -168,7 +175,8 @@ function ServiceCard({
       </div>
       <div className="p-5 flex items-center justify-between text-sm mt-auto">
         <button
-          onClick={() => setIsModalOpen && setIsModalOpen(true)}
+          type="button"
+          onClick={onQuickApply}
           className="text-brand cursor-pointer underline flex items-center gap-1 font-bold group/btn"
         >
           Quick Apply

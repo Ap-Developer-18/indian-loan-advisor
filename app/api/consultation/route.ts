@@ -28,8 +28,8 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
 
-    const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
-    const limit = Math.max(1, parseInt(searchParams.get("limit") || "10"));
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10));
+    const limit = Math.max(1, parseInt(searchParams.get("limit") || "10", 10));
     const search = searchParams.get("search")?.trim() || "";
     const loanType = searchParams.get("loanType")?.trim() || "";
 
@@ -39,11 +39,11 @@ export async function GET(req: Request) {
 
     if (search) {
       conditions.push(
-        `(pt::text(fullName) match "*${search}*" || phone match "*${search}*")`,
+        `(fullName match "*${search}*" || phone match "*${search}*")`,
       );
     }
 
-    if (loanType) {
+    if (loanType && loanType !== "all") {
       conditions.push(`loanType == "${loanType}"`);
     }
 
@@ -68,11 +68,11 @@ export async function GET(req: Request) {
 
     return NextResponse.json({
       success: true,
-      data,
-      total,
+      data: data || [],
+      total: total || 0,
       page,
-      totalPages: Math.ceil(total / limit),
-      loanTypes,
+      totalPages: Math.ceil((total || 0) / limit),
+      loanTypes: loanTypes || [],
     });
   } catch (err) {
     console.error(err);
