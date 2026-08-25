@@ -296,8 +296,8 @@ export default function Footer() {
       </div>
       <div className="container">
         <div className="border-t border-gray-2/20 py-6 flex items-center justify-center text-sm text-muted text-center">
-          <div className="flex justify-between max-lg:flex-col w-full items-center gap-4">
-            <div className="flex gap-2">
+          <div className="flex justify-center max-lg:flex-col w-full items-center gap-4">
+            {/* <div className="flex gap-2">
               {SOCIAL_LINKS.map((social, index) => (
                 <a
                   key={index}
@@ -324,7 +324,7 @@ export default function Footer() {
                   )}
                 </a>
               ))}
-            </div>
+            </div> */}
 
             <p className="border border-gray-2 bg-gray-1 p-3 rounded-md">
               <span className="font-bold underline">

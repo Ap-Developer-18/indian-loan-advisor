@@ -12,7 +12,7 @@ const contactDetails = [
     icon: MapPin,
     label: "Address",
     value:
-      "Seaone, 2nd Floor, Ganga Palace, Krishna Nagar, Sector 20B, Faridabad, Haryana - 121001",
+      "S1, 2nd Floor, Ganga Palace, Krishna Nagar, Sector 20B, Faridabad, 121001, Haryana.",
     href: "#",
   },
   {
