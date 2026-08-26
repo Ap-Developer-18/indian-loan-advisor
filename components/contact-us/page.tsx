@@ -25,8 +25,8 @@ const contactDetails = [
     icon: Phone,
     label: "Telephone",
     value: [
-      { label: "+91 9990533555", href: "tel:+919990533555" },
       { label: "+91 8595332014", href: "tel:+918595332014" },
+      { label: "+91 9990533555", href: "tel:+919990533555" },
     ],
     href: undefined,
   },
